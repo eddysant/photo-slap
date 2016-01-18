@@ -1,4 +1,4 @@
-# photo-parade
+# photo-slap
 electron slideshow application
 
 ### raison d'etre:
