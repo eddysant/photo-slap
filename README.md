@@ -2,7 +2,7 @@
 electron slideshow application
 
 ### raison d'etre:
-if you're like me you might have someone in your life who really enjoys taking photos. maybe you, like me, have tens of thousands of photos organized in hundreds of different folders and you're too lazy to go through them all individually. 
+if you're like me you might have someone in your life who really enjoys taking photos. maybe you, like me, have tens of thousands of photos, if not more, organized in many different folders and you're too lazy to go through them all individually. i have just always found slide show apps to be pretty bad, so hopefully this one is better. 
 
 my issue is that most slide show applications only seem to support one folder at a time or they don't have any support for gifs, or they don't let you delete the photo easily. This application will hopefully remedy all these issues.
 
@@ -11,8 +11,11 @@ my issue is that most slide show applications only seem to support one folder at
 * Use the shuffle feature in the menu to mix up the order of the photos
 * Support files include: [".jpg", ".jpeg", ".webp", "gif", ".png", ".bmp"]
 
-
 ### feature sets coming:
-* Slide-show controls, second choser
-* Support for child sub-directories
-* chromecast support
+* Updated splashscreen with instructions
+* Ability to delete photos
+* Updated Icons
+* Automatic slide show and on screen controls
+* Chromecast support
+* Post to social media
+* Cloud drive support (does photos.google.com have an api?)
