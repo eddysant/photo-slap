@@ -1,0 +1,32 @@
+{
+  "name": "photo-slap",
+  "version": "0.0.1",
+  "description": "An Electron slide-show application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "dependencies": {  
+	 "roboto-fontface": "^0.4.2",
+	 "octicons": "^3.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eddysant/photo-slap.git"
+  },
+  "keywords": [
+    "Electron",
+    "slide",
+    "show",
+    "photo"
+  ],
+  "author": "Eddy Sant",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/eddysant/photo-slap/issues"
+  },
+  "homepage": "https://github.com/eddysant/photo-slap#readme",
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.0"
+  }
+}
