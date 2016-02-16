@@ -6,9 +6,10 @@
   "scripts": {
     "start": "electron main.js"
   },
-  "dependencies": {  
-	 "roboto-fontface": "^0.4.2",
-	 "octicons": "^3.4.1"
+  "dependencies": {
+    "async": "^1.5.2",
+    "octicons": "^3.4.1",
+    "roboto-fontface": "^0.4.2"
   },
   "repository": {
     "type": "git",

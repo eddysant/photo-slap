@@ -8,10 +8,6 @@ var fs = require('fs');
 var utils = require('../js/utilities')
 var $ = require('../js/jquery');
 
-let file_list;
-let current_image;
-let opened_directories;
-
 $(document).on('keydown', function (e) {
 	
   if (e.keyCode === 37 ) return prevImage(e)
@@ -21,47 +17,33 @@ $(document).on('keydown', function (e) {
 
 function nextImage(e) {
 	// Show next image
-	console.log ("next");
-	current_image++;
-	ipc.send('update-display-image');
+	console.log ("next");	
+	ipc.send('get-next');
 }
 
 function prevImage(e) {
 	// Show previous image
-	console.log ("prev");
-	current_image--;
-	ipc.send('update-display-image');
+	console.log ("prev");	
+	ipc.send('get-prev');
 }
 
-ipc.on('update-display-image', function () {
-  if (file_list !=null && file_list.length > 0) {
-	
-	if (current_image >= file_list.length)
-		current_image = 0;
-	else if (current_image < 0)
-		current_image = file_list.length - 1;
-	
-	$('.display-image').css('background-image','url(' + file_list[current_image] + ')');
-  }
+ipc.on('update-display-image', function (e, image) {           
+    console.log('update-display-image');
+    $('#display-div').removeClass('hidden');
+    $('#splash-div').addClass('hidden');                 
+    
+    var adjusted_path = encodeURI(image.trim('\\').trim('/').replace(/\\/g, '/'));
+    
+    
+	$('#display-div').css('background-image', 'url(file://' + adjusted_path + ')');  
 });
 
-
-ipc.on('reset-display', function () {
-	$('.display-image').removeClass('.hidden');
-	$('.splash-image').addClass('.hidden');
-	file_list = [];
-});
-
-ipc.on('get-files', function () {
-
-    ipc.send('reset-display');
-	
+ipc.on('get-files', function (e, opened_directories) {
+    console.log('get-files');	
 	utils.getFiles(opened_directories, function(files){
       console.log(files);
-      file_list = files;	  
-	  current_image = 0;
-      ipc.send('update-display-image');
-	});
+      ipc.send ('load-files', files);            
+	});    
 });
 
 

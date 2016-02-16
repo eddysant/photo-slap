@@ -12,12 +12,13 @@ const utils = require('./js/utilities');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let main_win;
-let file_list;
-let current_image;
-let opened_directories;
 
 function createWindow () {
 
+  let file_list;  
+  let current_image;  
+
+  current_image = 0;
   main_win = new BrowserWindow({width: 1024, height: 768});
   main_win.loadURL('file://' + __dirname + '/html/index.html'); 
   
@@ -26,28 +27,73 @@ function createWindow () {
   
   // ipc functions
   
-  ipc.on('open-directories-dialog', function () {    
-    opened_directories = dialog.showOpenDialog({ properties: [ 'openDirectory', 'multiSelections' ]})	
+  ipc.on('open-directories-dialog', function (e) {    
+    var opened_directories = dialog.showOpenDialog({ properties: [ 'openDirectory', 'multiSelections' ]})	
 	if (opened_directories != null) {
-	   main_win.send('get-files');	
+	   main_win.send('get-files', opened_directories);	
 	}	    
+  });  
+
+  ipc.on('get-next', function (e) {
+    console.log('net-next');
+    if (file_list !=null && file_list.length > 0) {
+	   
+       current_image++;
+	   if (current_image >= file_list.length) {
+           current_image = 0;
+       }
+           	   
+       main_win.send('update-display-image', file_list[current_image]);
+    }
+  });  
+  
+  ipc.on('get-prev', function (e) {
+    console.log('net-prev');
+    if (file_list !=null && file_list.length > 0) {
+	   
+       current_image--;    
+           
+	   if (current_image < 0) { 
+		  current_image = file_list.length - 1;
+       }                            
+	
+        main_win.send('update-display-image', file_list[current_image]);
+    }
+  });   
+  
+  ipc.on('clear-images', function (eevent) {
+    console.log('clear-images');
+    file_list = [];
+    current_image = 0;
+    
+  });   
+  
+  ipc.on('load-files', function(e, files){
+     console.log('load-files');
+     if (files != null && files.length > 0 ) {              
+        current_image = 0;     
+        file_list = files[0];                      
+        main_win.send('update-display-image', file_list[current_image]);
+     } 
   });
   
-
-  ipc.on('shuffle-files', function (event, url) {
+  ipc.on('shuffle-files', function (e) {
+    console.log('shuffle-files');
+    if (file_list == null || file_list.length == 0){
+        return;
+    }
+        
     main_win.send('reset-display');
     file_list = utils.shuffle(file_list);
 	current_image = 0;
-    main_win.send('update-display-image');
-  });  
-
+    main_win.send('update-display-image', file_list[current_image]);
+  });    
   
-  ipc.on('open-url-in-external', function (event, url) {
+  ipc.on('open-url-in-external', function (e, url) {
     shell.openExternal(url)
-  });
+  });        
       
-      
-  ipc.on('close', function () {
+  ipc.on('close', function (e) {
     app.quit()
   });
   

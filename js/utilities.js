@@ -2,29 +2,41 @@
 
 var fs = require('fs');
 var path = require('path');
+var async = require('async');
 var config = require('../config');
 var $ = require('./jquery');  
 
+
+var directoryFiles = [];
+
 exports.getFiles = function (directories, callback) {
 		
-	var directoryWalks = [];		
-	var files = [];
-    
-    directories.forEach( function (dir) {		
-		directoryWalks.push( exports.walk (dir, function (error, results) {
-			if (error)	{
-				console.log(error);				
-			}
-			else {
-				files.push(results);
-			}
-		}));		
-	});	
+    console.log('getting files...');                				       
 
-	$.when.apply($,directoryWalks).done( function() { 	
-		callback(files);;	
-	});	
-}
+    async.forEach(directories, exports.walkDirectories, function(err) {
+        console.log("all done");
+        callback(directoryFiles);
+    });      
+};
+
+exports.walkDirectories = function (directory, done) {
+        
+    setTimeout(function() {
+        exports.walk (directory, function (error, results) {
+                                
+            if (error)	{
+                console.log(error);				
+            }
+            else {
+                console.log('adding files: ' +  results);
+                directoryFiles.push(results);                
+                done();
+            }
+        })                    
+    }, 2000);
+         
+};
+
 
 exports.walk = function(dir, done) {
 	
@@ -77,6 +89,10 @@ exports.walk = function(dir, done) {
 	
   });
   
+};
+
+exports.deleteFile = function(filename) {
+    fs.unlink(filename);
 };
 
 exports.shuffle = function(array) {
