@@ -13,27 +13,25 @@ exports.getFiles = function (directories, callback) {
 		
     console.log('getting files...');                				       
 
-    async.forEach(directories, exports.walkDirectories, function(err) {
+    async.each(directories, exports.walkDirectories, function(err) {
         console.log("all done");
         callback(directoryFiles);
     });      
 };
 
-exports.walkDirectories = function (directory, done) {
+exports.walkDirectories = function (directory, callback) {
         
-    setTimeout(function() {
-        exports.walk (directory, function (error, results) {
-                                
-            if (error)	{
-                console.log(error);				
-            }
-            else {
-                console.log('adding files: ' +  results);
-                directoryFiles.push(results);                
-                done();
-            }
-        })                    
-    }, 2000);
+  exports.walk (directory, function (error, results) {
+	                        
+    if (error)	{
+      console.log(error);				
+    }
+    else {
+      console.log('adding files: ' +  results);
+      directoryFiles.push(results);                
+      callback();
+    }
+  }) 
          
 };
 
