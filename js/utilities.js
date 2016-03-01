@@ -14,8 +14,14 @@ exports.getFiles = function (directories, callback) {
     console.log('getting files...');                				       
 
     async.each(directories, exports.walkDirectories, function(err) {
+    	
+    	if (err) {
+    		callback(null, err);
+    	}
+    	else {
         console.log("all done");
         callback(directoryFiles);
+    	}
     });      
 };
 
@@ -24,14 +30,15 @@ exports.walkDirectories = function (directory, callback) {
   exports.walk (directory, function (error, results) {
 	                        
     if (error)	{
-      console.log(error);				
+      console.log(error);
+      callback(error)
     }
     else {
       console.log('adding files: ' +  results);
       directoryFiles.push(results);                
       callback();
     }
-  }) 
+  });
          
 };
 
