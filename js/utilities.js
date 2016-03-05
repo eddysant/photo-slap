@@ -15,18 +15,20 @@ exports.getFiles = function (directories, callback) {
 
     async.each(directories, exports.walkDirectories, function(err) {
     	
-    	if (err) {
-    		callback(null, err);
+      if (err) {
+    	  callback(null, err);
     	}
-    	else {
-        console.log("all done");
-        callback(directoryFiles);
-    	}
+    	else {        
+          return callback(directoryFiles);
+      }
+        
     });      
+    
 };
 
 exports.walkDirectories = function (directory, callback) {
         
+
   exports.walk (directory, function (error, results) {
 	                        
     if (error)	{
@@ -44,7 +46,7 @@ exports.walkDirectories = function (directory, callback) {
 
 
 exports.walk = function(dir, done) {
-	
+  	
   var results = [];
   
   fs.readdir(dir, function(err, list) {

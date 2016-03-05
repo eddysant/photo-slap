@@ -32,8 +32,7 @@ ipc.on('update-display-image', function (e, image) {
     $('#display-div').removeClass('hidden');
     $('#splash-div').addClass('hidden');                 
     
-    var adjusted_path = encodeURI(image.trim('\\').trim('/').replace(/\\/g, '/'));
-    
+    var adjusted_path = encodeURI(image.replace(/\\/g, '/'));    
     
 	$('#display-div').css('background-image', 'url(file://' + adjusted_path + ')');  
 });
