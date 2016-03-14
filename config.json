@@ -1,3 +1,4 @@
 {
-  "supported_extensions": [".jpg", ".jpeg", ".webp", "gif", ".png", ".bmp"]
+  "supported_extensions": [".jpg", ".jpeg", ".webp", "gif", ".png", ".bmp"],
+  "supported_video": [".webm", ".mp4", "gifv"]
 }
