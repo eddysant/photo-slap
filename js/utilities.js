@@ -8,10 +8,14 @@ var $ = require('./jquery');
 
 
 var directoryFiles = [];
+var includeVideos = false;
 
-exports.getFiles = function (directories, callback) {
+exports.getFiles = function (directories, addVideos, callback) {
 		
-    console.log('getting files...');                				       
+    if (config.debug && config.debug === true)
+    	console.log('getting files...');                				       
+	
+    includeVideos = addVideos;
 
     async.each(directories, exports.walkDirectories, function(err) {
     	
@@ -73,16 +77,8 @@ exports.walk = function(dir, done) {
           });
 
         } else {			
-		
-		  var isImage = false;
-		  for(var i = 0; i < config.supported_extensions.length; i++) {
-		    if (file.toLowerCase().endsWith(config.supported_extensions[i])){
-				isImage = true;
-				break;
-			}  			  
-		  }
-		  
-          if (isImage) {
+			
+          if (exports.includeFile(file)) {
 			results.push(file);  
 		  }
           
@@ -97,6 +93,25 @@ exports.walk = function(dir, done) {
   });
   
 };
+
+exports.includeFile = function(filename) {
+	
+	for(var i = 0; i < config.supported_extensions.length; i++) {
+		if (filename.toLowerCase().endsWith(config.supported_extensions[i])){
+			return true;
+		}  			  
+  	}
+  	
+  	if (includeVideos) {
+  		for(var i = 0; i < config.supported_video.length; i++) {
+			if (filename.toLowerCase().endsWith(config.supported_video[i])){
+				return true;
+			}  			  
+	  	}
+  	}
+  	
+  	return false;
+}
 
 exports.deleteFile = function(filename) {
     fs.unlink(filename);
