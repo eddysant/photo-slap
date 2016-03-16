@@ -36,11 +36,13 @@ exports.walkDirectories = function (directory, callback) {
   exports.walk (directory, function (error, results) {
 	                        
     if (error)	{
-      console.log(error);
+		if (config.debug && config.debug === true)
+      		console.log(error);
       callback(error)
     }
     else {
-      console.log('adding files: ' +  results);
+    	if (config.debug && config.debug === true)
+      		console.log('adding files: ' +  results);
       directoryFiles.push(results);                
       callback();
     }
