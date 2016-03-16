@@ -17,18 +17,24 @@ $(document).on('keydown', function (e) {
 
 function nextImage(e) {
 	// Show next image
-	console.log ("next");	
+	if (config.debug && config.debug === true)
+		console.log ("next");	
+		
 	ipc.send('get-next');
 }
 
 function prevImage(e) {
 	// Show previous image
-	console.log ("prev");	
+	if (config.debug && config.debug === true)
+		console.log ("prev");	
+		
 	ipc.send('get-prev');
 }
 
-ipc.on('update-display-image', function (e, image) {           
-    console.log('update-display-image');
+ipc.on('update-display-image', function (e, image) {         
+	if (config.debug && config.debug === true)
+    	console.log('update-display-image');
+    	
     $('#display-div').removeClass('hidden');
     $('#splash-div').addClass('hidden');                 
     
@@ -38,10 +44,14 @@ ipc.on('update-display-image', function (e, image) {
 });
 
 ipc.on('get-files', function (e, opened_directories) {
-    console.log('get-files');	
-	utils.getFiles(opened_directories, function(files){
-      console.log(files);
-      ipc.send ('load-files', files);            
+	if (config.debug && config.debug === true)
+    	console.log('get-files');	
+    	
+	utils.getFiles(opened_directories, false, function(files){
+		if (config.debug && config.debug === true)
+      		console.log(files);
+      		
+      	ipc.send ('load-files', files);            
 	});    
 });
 
