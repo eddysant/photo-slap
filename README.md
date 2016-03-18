@@ -12,10 +12,10 @@ my issue is that most slide show applications only seem to support one folder at
 * Support files include: [".jpg", ".jpeg", ".webp", "gif", ".png", ".bmp"]
 
 ### feature sets coming:
-* Updated splashscreen with instructions
+* Video Support
 * Ability to delete photos
 * Updated Icons
 * Automatic slide show and on screen controls
 * Chromecast support
-* Post to social media
-* Cloud drive support (does photos.google.com have an api?)
+* Social media integration
+* Cloud drive support
