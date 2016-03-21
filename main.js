@@ -7,6 +7,7 @@ const dialog = require('dialog');
 const ipc = require('electron').ipcMain;
 const shell = require('shell');
 const utils = require('./js/utilities');
+const config = require('./config');
 
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -23,7 +24,9 @@ function createWindow () {
   main_win.loadURL('file://' + __dirname + '/html/index.html'); 
   
   // Open the DevTools.
-  main_win.webContents.openDevTools();
+  if (config.debug && config.debug === true) {
+    main_win.webContents.openDevTools();
+  }
   
   // ipc functions
   
@@ -35,57 +38,62 @@ function createWindow () {
   });  
 
   ipc.on('get-next', function (e) {
-    console.log('net-next');
-    if (file_list !=null && file_list.length > 0) {
-	   
-       current_image++;
-	   if (current_image >= file_list.length) {
-           current_image = 0;
-       }
-           	   
-       main_win.send('update-display-image', file_list[current_image]);
+    
+        
+    if (file_list !=null && file_list.length > 0) {	   
+      current_image++;
+      if (current_image >= file_list.length) {
+        current_image = 0;
+      }
+      
+      utils.debugLog('get-next: ' + current_image + " | " + file_list[current_image] );     	   
+      main_win.send('update-display-image', file_list[current_image]);      
     }
   });  
   
   ipc.on('get-prev', function (e) {
-    console.log('net-prev');
+        
     if (file_list !=null && file_list.length > 0) {
-	   
-       current_image--;    
-           
-	   if (current_image < 0) { 
-		  current_image = file_list.length - 1;
-       }                            
-	
-        main_win.send('update-display-image', file_list[current_image]);
+	    current_image--;    
+      
+      if (current_image < 0) { 
+		    current_image = file_list.length - 1;
+      }
+      
+      utils.debugLog('get-prev: ' + current_image + " | " + file_list[current_image] );    
+      main_win.send('update-display-image', file_list[current_image]);
     }
   });   
   
   ipc.on('clear-images', function (eevent) {
-    console.log('clear-images');
+    utils.debugLog('clear-images');
     file_list = [];
     current_image = 0;
-    
+
   });   
   
   ipc.on('load-files', function(e, files){
-     console.log('load-files');
-     if (files != null && files.length > 0 ) {              
-        current_image = 0;     
-        file_list = files[0];                      
-        main_win.send('update-display-image', file_list[current_image]);
-     } 
+    file_list = [];
+    
+    utils.debugLog('load-files');
+    if (files != null && files.length > 0 ) {              
+      current_image = 0;     
+      file_list = files;
+      
+      main_win.send('update-display-image', file_list[current_image]);
+    }
+     
   });
   
   ipc.on('shuffle-files', function (e) {
-    console.log('shuffle-files');
+    utils.debugLog('shuffle-files');
     if (file_list == null || file_list.length == 0){
         return;
     }
         
     main_win.send('reset-display');
     file_list = utils.shuffle(file_list);
-	current_image = 0;
+    current_image = 0;
     main_win.send('update-display-image', file_list[current_image]);
   });    
   

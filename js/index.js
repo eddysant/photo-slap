@@ -17,41 +17,43 @@ $(document).on('keydown', function (e) {
 
 function nextImage(e) {
 	// Show next image
-	if (config.debug && config.debug === true)
-		console.log ("next");	
 		
+  utils.debugLog('next.');    
 	ipc.send('get-next');
 }
 
 function prevImage(e) {
 	// Show previous image
-	if (config.debug && config.debug === true)
-		console.log ("prev");	
-		
+  
+  utils.debugLog('previous.');
 	ipc.send('get-prev');
 }
 
 ipc.on('update-display-image', function (e, image) {         
-	if (config.debug && config.debug === true)
-    	console.log('update-display-image');
-    	
-    $('#display-div').removeClass('hidden');
-    $('#splash-div').addClass('hidden');                 
+	
+  utils.debugLog('update-display-image');      	
+  $('#display-div').removeClass('hidden');
+  $('#splash-div').addClass('hidden');                         
+  
+  var adjusted_path = encodeURI(image.replace(/\\/g, '/'));        
+	$('#display-div').css('background-image', 'url(file://' + adjusted_path + ')');
     
-    var adjusted_path = encodeURI(image.replace(/\\/g, '/'));    
-    
-	$('#display-div').css('background-image', 'url(file://' + adjusted_path + ')');  
 });
 
 ipc.on('get-files', function (e, opened_directories) {
-	if (config.debug && config.debug === true)
-    	console.log('get-files');	
-    	
+	utils.debugLog('get-files');
+
+  $('#loading-div').removeClass('hidden');
+  $('#splash-div').addClass('hidden');
+  $('#display-div').addClass('hidden');                       
+      	
 	utils.getFiles(opened_directories, false, function(files){
-		if (config.debug && config.debug === true)
-      		console.log(files);
-      		
-      	ipc.send ('load-files', files);            
+    
+    $('#loading-div').addClass('hidden');
+    
+    utils.debugLog(files);          		
+   	ipc.send ('load-files', files);
+                 
 	});    
 });
 
