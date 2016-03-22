@@ -4,7 +4,8 @@
   "description": "An Electron slide-show application",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron main.js",
+    "win-bundle": "electron-packager . photo-slap --platform=win32 --arch=ia32 --version=0.0.1"
   },
   "dependencies": {
     "async": "^1.5.2",
@@ -28,6 +29,7 @@
   },
   "homepage": "https://github.com/eddysant/photo-slap#readme",
   "devDependencies": {
-    "electron-prebuilt": "^0.36.0"
+    "electron-prebuilt": "^0.36.0",
+    "election-packager": "^5.2.1"
   }
 }

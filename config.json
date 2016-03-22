@@ -1,5 +1,5 @@
 {
   "debug": true,
   "supported_extensions": [".jpg", ".jpeg", ".webp", "gif", ".png", ".bmp"],
-  "supported_video": [".webm", ".mp4", "gifv"]
+  "supported_video": [".webm", ".mp4", "gifv", "ogg"]
 }
