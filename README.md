@@ -9,8 +9,8 @@ my issue is that most slide show applications only seem to support one folder at
 ### current feature set:
 * Open a group of directories and arrow key through photos
 * Use the shuffle feature in the menu to mix up the order of the photos
-* Support files include: [".jpg", ".jpeg", ".webp", "gif", ".png", ".bmp"]
-* Supported videos include: [".webm", ".mp4", "gifv", "ogg"] (Assuming it has a compatible encoding)
+* Support files include: ".jpg", ".jpeg", ".webp", "gif", ".png", ".bmp"
+* Supported videos include: ".webm", ".mp4", "gifv", "ogg" (Assuming it has a compatible encoding)
 
 ### feature sets coming:
 * Ability to delete photos
