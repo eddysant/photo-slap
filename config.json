@@ -1,5 +1,18 @@
 {
   "debug": true,
-  "supported_extensions": [".jpg", ".jpeg", ".webp", "gif", ".png", ".bmp"],
-  "supported_video": [".webm", ".mp4", "gifv", "ogg"]
+  "supported_extensions": [
+    ".jpg",
+    ".jpeg",
+    ".webp",
+    "gif",
+    ".png",
+    ".bmp"
+  ],
+  "supported_video": [
+    ".webm",
+    ".mp4",
+    "gifv",
+    "ogg"
+  ],
+  "number_of_splash_imgs": 7
 }

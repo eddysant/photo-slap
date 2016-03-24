@@ -6,9 +6,14 @@ var Menu = remote.require('menu');
 var MenuItem = remote.require('menu-item');
 var fs = require('fs');
 var utils = require('../js/utilities')
+var config = require('../config');
 var $ = require('../js/jquery');
 
 let load_videos = false;
+
+$(document).ready(function() {
+  chooseSplash();    
+});
 
 $(document).on('keydown', function(e) {
 
@@ -42,6 +47,13 @@ function deleteImage(e) {
   
 }
 
+function chooseSplash(e) {  
+  
+  var random = Math.floor((Math.random() * config.number_of_splash_imgs) + 1);
+  utils.debugLog('update-splash-image: ' + random);  
+  $('#splash-div').css('background-image', 'url(./images/splash-' + random + '.jpg)');
+}
+
 ipc.on('update-display-image', function(e, filename) {
 
   var adjusted_path = encodeURI(filename.replace(/\\/g, '/')).replace('(', '\\(').replace(')', '\\)');
@@ -61,6 +73,7 @@ ipc.on('update-display-image', function(e, filename) {
   }
 
 });
+
 
 ipc.on('get-files', function(e, opened_directories) {
   utils.debugLog('get-files');

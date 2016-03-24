@@ -20,13 +20,14 @@ function createWindow() {
   let current_image;
 
   current_image = 0;
-  main_win = new BrowserWindow({ width: 1024, height: 768, icon: 'file://' + __dirname + '/resources/image.ico' });
+  main_win = new BrowserWindow({ width: 1024, height: 768, icon: '/resources/image.ico' });
   main_win.loadURL('file://' + __dirname + '/html/index.html');
 
   // Open the DevTools.
   if (config.debug && config.debug === true) {
     main_win.webContents.openDevTools();
   }
+    
 
   // ipc functions
 
