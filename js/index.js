@@ -14,7 +14,8 @@ $(document).on('keydown', function(e) {
 
   if (e.keyCode === 37) return prevImage(e)
   if (e.keyCode === 39) return nextImage(e)
-
+  if (e.keyCode === 46) return deleteImage(e)
+  
 });
 
 function nextImage(e) {
@@ -29,6 +30,16 @@ function prevImage(e) {
 
   utils.debugLog('previous.');
   ipc.send('get-prev');
+}
+
+function deleteImage(e) {
+  utils.debugLog('delete');
+  
+  var yes_no = confirm('Are you sure you want to delete the image?');
+  if (yes_no === true) {
+    ipc.send('delete-file');
+  }
+  
 }
 
 ipc.on('update-display-image', function(e, filename) {

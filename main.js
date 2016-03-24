@@ -65,7 +65,18 @@ function createWindow() {
     }
   });
 
-  ipc.on('clear-images', function(eevent) {
+  ipc.on('delete-file', function(e) {
+    
+    if (utils.deleteFile(file_list[current_image])){
+      file_list.splice(current_image, current_image);
+      main_win.send('update-display-image', file_list[current_image]);
+    } else {
+      alert('error deleting file');
+    }
+    
+  });
+
+  ipc.on('clear-images', function(event) {
     utils.debugLog('clear-images');
     file_list = [];
     current_image = 0;

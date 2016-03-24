@@ -102,7 +102,12 @@ exports.includeFile = function(filename) {
 }
 
 exports.deleteFile = function(filename) {
-  fs.unlink(filename);
+  try {
+    fs.unlink(filename);
+    return true;
+  } catch (ex) {
+    return false;
+  }
 };
 
 exports.shuffle = function(array) {
