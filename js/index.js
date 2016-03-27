@@ -56,13 +56,16 @@ function chooseSplash(e) {
 
 ipc.on('update-display-image', function(e, filename) {
 
-  var adjusted_path = encodeURI(filename.replace(/\\/g, '/')).replace('(', '\\(').replace(')', '\\)');
+  var adjusted_path = encodeURI(filename.replace(/\\/g, '/')).replace(/\(/g, '\\(').replace(/\)/g, '\\)').replace(/\'/g, '\\\'').replace(/\#/g, '%23');
   utils.debugLog('update-display-image: ' + adjusted_path);  
   
   $('#splash-div').addClass('hidden');
   $('#video-div').addClass('hidden');
   $('#display-div').addClass('hidden');  
-  $('#video-player').attr('src', '');
+  
+  $('#video-player').attr('src', '');  
+  $('#display-div').css('background-image', 'none');
+  $('#splash-div').css('background-image', 'none');
   
   if ( utils.isVideo(filename) ) {
     $('#video-div').removeClass('hidden');

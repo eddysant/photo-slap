@@ -4,7 +4,7 @@
   "description": "An Electron slide-show application",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js",
+    "start": "electron main.js --disable-http-cache",
     "win-bundle": "electron-packager . photo-slap --platform=win32 --arch=ia32 --version=0.0.1"
   },
   "dependencies": {

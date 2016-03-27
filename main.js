@@ -20,7 +20,7 @@ function createWindow() {
   let current_image;
 
   current_image = 0;
-  main_win = new BrowserWindow({ width: 1024, height: 768, icon: '/resources/image.ico' });
+  main_win = new BrowserWindow({ width: 1024, height: 768, icon: './resources/photoslap.png' });
   main_win.loadURL('file://' + __dirname + '/html/index.html');
 
   // Open the DevTools.
@@ -30,7 +30,6 @@ function createWindow() {
     
 
   // ipc functions
-
   ipc.on('open-directories-dialog', function(e) {
     var opened_directories = dialog.showOpenDialog({ properties: ['openDirectory', 'multiSelections'] })
     if (opened_directories != null) {
