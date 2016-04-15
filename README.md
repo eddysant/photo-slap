@@ -24,3 +24,4 @@ my issue is that most slide show applications only seem to support one folder at
 
 
 ### licensing
+MIT
