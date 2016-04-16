@@ -30,45 +30,52 @@ function createWindow() {
     
 
   // ipc functions
-  ipc.on('open-directories-dialog', function(e) {
-    var opened_directories = dialog.showOpenDialog({ properties: ['openDirectory', 'multiSelections'] })
-    if (opened_directories != null) {
-      main_win.send('get-files', opened_directories);
-    }
+  ipc.on('open-directories-dialog', function(e) {       
+    main_win.webContents.session.clearStorageData({'storages' : ['appcache', 'cookies', 'filesystem', 'indexdb', 'local storage', 'shadercache', 'websql', 'serviceworkers']}, function() {
+      var opened_directories = dialog.showOpenDialog({ properties: ['openDirectory', 'multiSelections'] })
+      if (opened_directories != null) {
+        main_win.send('get-files', opened_directories);
+      }
+    });;
   });
 
   ipc.on('get-next', function(e) {
+    main_win.webContents.session.clearCache(function() {
 
-
-    if (file_list != null && file_list.length > 0) {
-      current_image++;
-      if (current_image >= file_list.length) {
-        current_image = 0;
+      if (file_list != null && file_list.length > 0) {
+        current_image++;
+        if (current_image >= file_list.length) {
+          current_image = 0;
+        }
+        
+        utils.debugLog('get-next: ' + current_image + " | " + file_list[current_image]);
+        main_win.setTitle(file_list[current_image]);
+        main_win.send('update-display-image', file_list[current_image]);
       }
-
-      utils.debugLog('get-next: ' + current_image + " | " + file_list[current_image]);
-      main_win.send('update-display-image', file_list[current_image]);
-    }
+    });
   });
 
   ipc.on('get-prev', function(e) {
+    main_win.webContents.session.clearCache(function() {
+      if (file_list != null && file_list.length > 0) {
+        current_image--;
 
-    if (file_list != null && file_list.length > 0) {
-      current_image--;
+        if (current_image < 0) {
+          current_image = file_list.length - 1;
+        }
 
-      if (current_image < 0) {
-        current_image = file_list.length - 1;
+        utils.debugLog('get-prev: ' + current_image + " | " + file_list[current_image]);
+        main_win.setTitle(file_list[current_image]);
+        main_win.send('update-display-image', file_list[current_image]);
       }
-
-      utils.debugLog('get-prev: ' + current_image + " | " + file_list[current_image]);
-      main_win.send('update-display-image', file_list[current_image]);
-    }
+    })
   });
 
   ipc.on('delete-file', function(e) {
     
     if (utils.deleteFile(file_list[current_image])){
       file_list.splice(current_image, 1);
+      main_win.setTitle(file_list[current_image]);
       main_win.send('update-display-image', file_list[current_image]);
     } else {
       alert('error deleting file');
@@ -80,6 +87,7 @@ function createWindow() {
     utils.debugLog('clear-images');
     file_list = [];
     current_image = 0;
+    main_win.setTitle('');
 
   });
 
@@ -91,6 +99,7 @@ function createWindow() {
       current_image = 0;
       file_list = files;
 
+      main_win.setTitle(file_list[current_image]);
       main_win.send('update-display-image', file_list[current_image]);
     }
 

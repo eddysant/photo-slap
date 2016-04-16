@@ -60,12 +60,15 @@ ipc.on('update-display-image', function(e, filename) {
   utils.debugLog('update-display-image: ' + adjusted_path);  
   
   $('#splash-div').addClass('hidden');
-  $('#video-div').addClass('hidden');
-  $('#display-div').addClass('hidden');  
-  
-  $('#video-player').attr('src', '');  
-  $('#display-div').css('background-image', 'none');
   $('#splash-div').css('background-image', 'none');
+  
+  $('#video-div').addClass('hidden');      
+  $('#video-player').attr('src', '');    
+  
+  
+  
+  $('#display-div').remove();
+  $('#loading-div').after('<div id="display-div" class="display-image"></div>');  
   
   if ( utils.isVideo(filename) ) {
     $('#video-div').removeClass('hidden');
