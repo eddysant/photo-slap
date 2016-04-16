@@ -10,17 +10,21 @@ var config = require('../config');
 var $ = require('../js/jquery');
 
 let load_videos = false;
+let shuffle_files = false;
 
 $(document).ready(function() {
   chooseSplash();    
+});
+
+$('#add_directories').on('click', function(e) {
+  ipc.send('open-directories-dialog');
 });
 
 $(document).on('keydown', function(e) {
 
   if (e.keyCode === 37) return prevImage(e)
   if (e.keyCode === 39) return nextImage(e)
-  if (e.keyCode === 46) return deleteImage(e)
-  
+  if (e.keyCode === 46) return deleteImage(e) 
 });
 
 function nextImage(e) {
@@ -89,10 +93,15 @@ ipc.on('get-files', function(e, opened_directories) {
   $('#display-div').addClass('hidden');
 
   load_videos = $('#include_video').is(':checked');
+  shuffle_files = $('#shuffle_files').is(':checked');
 
   utils.getFiles(opened_directories, load_videos, function(files) {
 
     $('#loading-div').addClass('hidden');
+
+    if (shuffle_files) {
+      utils.shuffle(files);  
+    }
 
     utils.debugLog(files);
    	ipc.send('load-files', files);

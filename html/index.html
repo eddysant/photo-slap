@@ -17,11 +17,16 @@
 </head>
 
 <body>
-  <div id="splash-div" class="splash-image">
+  <div id="splash-div" class="splash-image">    
     <p>Use the menu above to choose directories to add to your queue. Click the randomize function, to mix up the order. Use
       your arrow keys to navigate back and forth</p>
     <p>
+      <input type="checkbox" id="shuffle_files" checked> Shuffle Files</input> 
+      </br>
       <input type="checkbox" id="include_video" checked> Include videos</input>
+    </p>    
+    <p>
+      <div class="button" id="add_directories"><span class="octicon octicon-file-directory"></span> Add Directories</div>
     </p>
   </div>
   <div id="loading-div" class="loading-image hidden"></div>
