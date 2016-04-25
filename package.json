@@ -4,7 +4,8 @@
   "description": "An Electron slide-show application",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js --disable-http-cache",
+    "start": "electron main.js",
+	  "test": "mocha ./test/test.js",
     "win-bundle": "electron-packager . photo-slap --platform=win32 --arch=ia32 --version=0.0.1"
   },
   "dependencies": {
@@ -29,7 +30,9 @@
   },
   "homepage": "https://github.com/eddysant/photo-slap#readme",
   "devDependencies": {
+    "electron-packager": "^5.2.1",
     "electron-prebuilt": "^0.36.0",
-    "electron-packager": "^5.2.1"
+    "mocha": "^2.4.5",
+    "should": "^8.3.1"
   }
 }
