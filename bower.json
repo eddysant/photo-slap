@@ -1,0 +1,10 @@
+{
+  "name": "photo-slap",
+  "version": "0.0.2",
+  "dependencies": {
+    "octicons": "^3.4.1",
+    "roboto-fontface": "^0.4.2"
+  },
+  "devDependencies": {
+  }
+}

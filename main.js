@@ -3,12 +3,12 @@
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
-const dialog = require('dialog');
-const ipc = require('electron').ipcMain;
-const shell = require('shell');
+const dialog = electron.dialog;
+const ipc = electron.ipcMain;
+const shell = electron.shell;
+
 const utils = require('./js/utilities');
 const config = require('./config');
-
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -31,7 +31,7 @@ function createWindow() {
 
   // ipc functions
   ipc.on('open-directories-dialog', function(e) {       
-    main_win.webContents.session.clearStorageData({'storages' : ['appcache', 'cookies', 'filesystem', 'indexdb', 'local storage', 'shadercache', 'websql', 'serviceworkers']}, function() {
+    main_win.webContents.session.clearStorageData({'storages' : ['appcache', 'cookies', 'filesystem', 'indexdb', 'local storage']}, function() {
       var opened_directories = dialog.showOpenDialog({ properties: ['openDirectory', 'multiSelections'] })
       if (opened_directories != null) {
         main_win.send('get-files', opened_directories);

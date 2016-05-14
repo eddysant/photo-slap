@@ -1,13 +1,13 @@
 'use strict';
-
-var ipc = require('electron').ipcRenderer;
-var remote = require('remote');
-var Menu = remote.require('menu');
-var MenuItem = remote.require('menu-item');
-var fs = require('fs');
-var utils = require('../js/utilities')
-var config = require('../config');
-var $ = require('../js/jquery');
+const electron = require('electron');
+const ipc = electron.ipcRenderer;
+const remote = electron.remote;
+const Menu = remote.Menu;
+const MenuItem = remote.MenuItem;
+const fs = require('fs');
+const utils = require('../js/utilities')
+const config = require('../config');
+const $ = require('../js/jquery');
 
 let load_videos = false;
 let shuffle_files = false;

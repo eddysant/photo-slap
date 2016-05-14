@@ -1,17 +1,15 @@
 {
   "name": "photo-slap",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An Electron slide-show application",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
-	  "test": "mocha ./test/test.js",
+    "test": "mocha ./test/test.js",
     "win-bundle": "electron-packager . photo-slap --platform=win32 --arch=ia32 --version=0.0.1"
   },
   "dependencies": {
-    "async": "^1.5.2",
-    "octicons": "^3.4.1",
-    "roboto-fontface": "^0.4.2"
+    "async": "^1.5.2"
   },
   "repository": {
     "type": "git",
@@ -31,7 +29,7 @@
   "homepage": "https://github.com/eddysant/photo-slap#readme",
   "devDependencies": {
     "electron-packager": "^5.2.1",
-    "electron-prebuilt": "^0.36.0",
+    "electron-prebuilt": "^1.0.1",
     "mocha": "^2.4.5",
     "should": "^8.3.1"
   }
