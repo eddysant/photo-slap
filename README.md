@@ -1,7 +1,8 @@
 # photo-slap
 electron slideshow application
 
-[![Build Status](https://travis-ci.org/eddysant/photo-slap.svg?branch=master)](https://travis-ci.org/eddysant/photo-slap)
+[![Build Status](https://travis-ci.org/eddysant/photo-slap.svg?branch=master)](https://travis-ci.org/eddysant/photo-slap) 
+[![Dependency Status](https://www.versioneye.com/user/projects/573232bea0ca350034be760c/badge.svg?style=flat)](https://www.versioneye.com/user/projects/573232bea0ca350034be760c)
 
 ### raison d'etre:
 if you're like me you might have someone in your life who really enjoys taking photos. maybe you, like me, have tens of thousands of photos, if not more, organized in many different folders and you're too lazy to go through them all individually. i have just always found slide show apps to be pretty bad, so hopefully this one is better. 
