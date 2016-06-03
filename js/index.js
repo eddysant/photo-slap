@@ -1,11 +1,12 @@
 'use strict';
+
 const electron = require('electron');
 const ipc = electron.ipcRenderer;
 const remote = electron.remote;
 const Menu = remote.Menu;
 const MenuItem = remote.MenuItem;
 const fs = require('fs');
-const utils = require('../js/utilities')
+const utils = require('../js/utilities');
 const config = require('../config');
 const $ = require('../js/jquery');
 
@@ -13,7 +14,7 @@ let load_videos = false;
 let shuffle_files = false;
 
 $(document).ready(function() {
-  chooseSplash();    
+  chooseSplash();
 });
 
 $('#add_directories').on('click', function(e) {
@@ -21,10 +22,21 @@ $('#add_directories').on('click', function(e) {
 });
 
 $(document).on('keydown', function(e) {
-
-  if (e.keyCode === 37) return prevImage(e)
-  if (e.keyCode === 39) return nextImage(e)
-  if (e.keyCode === 46) return deleteImage(e) 
+  const back_arrow = 37;
+  const forward_arrow = 39;
+  const delete_key = 46;
+  
+  if (e.keyCode === back_arrow) {
+    return prevImage(e);
+  }
+  if (e.keyCode === forward_arrow) {
+    return nextImage(e);
+  }
+  if (e.keyCode === delete_key) {
+    return deleteImage(e);
+  }
+  
+  return null;
 });
 
 function nextImage(e) {
@@ -44,41 +56,42 @@ function prevImage(e) {
 function deleteImage(e) {
   utils.debugLog('delete');
   
-  var yes_no = confirm('Are you sure you want to delete the image?');
+  const yes_no = confirm('Are you sure you want to delete the image?');
   if (yes_no === true) {
     ipc.send('delete-file');
   }
   
 }
 
-function chooseSplash(e) {  
+function chooseSplash(e) {
   
-  var random = Math.floor((Math.random() * config.number_of_splash_imgs) + 1);
-  utils.debugLog('update-splash-image: ' + random);  
+  const random = Math.floor((Math.random() * config.number_of_splash_imgs) + 1);
+  utils.debugLog('update-splash-image: ' + random);
   $('#splash-div').css('background-image', 'url(./images/splash-' + random + '.jpg)');
 }
 
 ipc.on('update-display-image', function(e, filename) {
 
-  var adjusted_path = encodeURI(filename.replace(/\\/g, '/')).replace(/\(/g, '\\(').replace(/\)/g, '\\)').replace(/\'/g, '\\\'').replace(/\#/g, '%23');
-  utils.debugLog('update-display-image: ' + adjusted_path);  
+  const adjusted_path = encodeURI(filename.replace(/\\/g, '/')).replace(/\(/g, '\\(').replace(/\)/g, '\\)').replace(/'/g, '\\\'').replace(/#/g, '%23');
+  utils.debugLog('update-display-image: ' + adjusted_path);
   
   $('#splash-div').addClass('hidden');
   $('#splash-div').css('background-image', 'none');
   
-  $('#video-div').addClass('hidden');      
-  $('#video-player').attr('src', '');    
+  $('#video-div').addClass('hidden');
+  $('#video-player').attr('src', '');
   
   
   
   $('#display-div').remove();
-  $('#loading-div').after('<div id="display-div" class="display-image"></div>');  
+  $('#loading-div').after('<div id="display-div" class="display-image"></div>');
   
-  if ( utils.isVideo(filename) ) {
+  if (utils.isVideo(filename)) {
     $('#video-div').removeClass('hidden');
-    $('#video-player').attr('src', adjusted_path);    
-  } else {          
-    $('#display-div').removeClass('hidden');    
+    $('#video-player').attr('src', adjusted_path);
+  }
+  else {
+    $('#display-div').removeClass('hidden');
     $('#display-div').css('background-image', 'url(file://' + adjusted_path + ')');
   }
 
@@ -100,29 +113,33 @@ ipc.on('get-files', function(e, opened_directories) {
     $('#loading-div').addClass('hidden');
 
     if (shuffle_files) {
-      utils.shuffle(files);  
+      utils.shuffle(files);
     }
 
     utils.debugLog(files);
-   	ipc.send('load-files', files);
+    ipc.send('load-files', files);
 
   });
 });
 
 
-var appmenu_template = [
+const appmenu_template = [
   {
     label: 'photo-slap',
     submenu: [
       {
         label: 'add directories',
         accelerator: 'Command+O',
-        click: function() { ipc.send('open-directories-dialog'); }
+        click: function() {
+          ipc.send('open-directories-dialog');
+        }
       },
       {
         label: 'shuffle',
         accelerator: 'Command+R',
-        click: function() { ipc.send('shuffle-files'); }
+        click: function() {
+          ipc.send('shuffle-files');
+        }
       },
       {
         type: 'separator'
@@ -130,7 +147,9 @@ var appmenu_template = [
       {
         label: 'quit',
         accelerator: 'Command+Q',
-        click: function() { ipc.send('close'); }
+        click: function() {
+          ipc.send('close');
+        }
       }
     ]
   },
@@ -139,16 +158,20 @@ var appmenu_template = [
     submenu: [
       {
         label: 'about photo-slap',
-        click: function() { ipc.send('open-url-in-external', 'https://github.com/eddysant/photo-slap'); }
+        click: function() {
+          ipc.send('open-url-in-external', 'https://github.com/eddysant/photo-slap');
+        }
       },
       {
         label: 'report issue',
-        click: function() { ipc.send('open-url-in-external', 'https://github.com/eddysant/photo-slap/issues'); }
+        click: function() {
+          ipc.send('open-url-in-external', 'https://github.com/eddysant/photo-slap/issues');
+        }
       }
     ]
   }
 ];
 
-var appmenu = Menu.buildFromTemplate(appmenu_template);
+const appmenu = Menu.buildFromTemplate(appmenu_template);
 Menu.setApplicationMenu(appmenu);
 

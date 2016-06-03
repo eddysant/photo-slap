@@ -1,14 +1,14 @@
 'use strict';
 
-var fs = require('fs');
-var path = require('path');
-var async = require('async');
-var config = require('../config');
-var $ = require('./jquery');
+const fs = require('fs');
+const path = require('path');
+const async = require('async');
+const config = require('../config');
+const $ = require('./jquery');
 
 
-var directoryFiles = [];
-var includeVideos = false;
+let directoryFiles = [];
+let includeVideos = false;
 
 exports.getFiles = function(directories, addVideos, callback) {
 
@@ -17,8 +17,9 @@ exports.getFiles = function(directories, addVideos, callback) {
 
   async.each(directories, exports.walkDirectories, function(err) {
     if (err) {
-      callback(null, err);
-    } else {
+      return callback(null, err);
+    }
+    else {
       return callback(directoryFiles);
     }
   });
@@ -31,11 +32,12 @@ exports.walkDirectories = function(directory, callback) {
 
     if (error) {
       exports.debugLog(error);
-      callback(error)
-    } else {
+      return callback(error);
+    }
+    else {
       exports.debugLog('adding files: ' + results);
       directoryFiles = directoryFiles.concat(results);
-      callback();
+      return callback();
     }
   });
 
@@ -44,7 +46,7 @@ exports.walkDirectories = function(directory, callback) {
 
 exports.walk = function(dir, done) {
 
-  var results = [];
+  let results = [];
 
   fs.readdir(dir, function(err, list) {
 
@@ -52,33 +54,34 @@ exports.walk = function(dir, done) {
       return done(err);
     }
 
-    var pending = list.length;
+    let pending = list.length;
     if (!pending) {
       return done(null, results);
     }
 
     list.forEach(function(file) {
 
-      file = path.resolve(dir, file);
-      fs.stat(file, function(err, stat) {
+      const resolved_file = path.resolve(dir, file);
+      fs.stat(resolved_file, function(err, stat) {
 
         if (stat && stat.isDirectory()) {
           exports.walk(file, function(err, res) {
             results = results.concat(res);
 
             if (!--pending) {
-              done(null, results);
+              return done(null, results);
             }
           });
 
-        } else {
+        }
+        else {
 
           if (exports.includeFile(file)) {
             results.push(file);
           }
 
           if (!--pending) {
-            done(null, results);
+            return done(null, results);
           }
         }
       });
@@ -88,33 +91,34 @@ exports.walk = function(dir, done) {
 
 exports.includeFile = function(filename) {
 
-  for (var i = 0; i < config.supported_extensions.length; i++) {
+  for (let i = 0; i < config.supported_extensions.length; i++) {
     if (filename.toLowerCase().endsWith(config.supported_extensions[i])) {
       return true;
     }
   }
 
   if (includeVideos) {
-    return exports.isVideo(filename);    
+    return exports.isVideo(filename);
   }
 
   return false;
-}
+};
 
 exports.deleteFile = function(filename) {
   try {
     fs.unlink(filename);
     return true;
-  } catch (ex) {
+  }
+  catch (ex) {
     return false;
   }
 };
 
 exports.shuffle = function(array) {
 
-  var currentIndex = array.length;
-  var temporaryValue;
-  var randomIndex;
+  let currentIndex = array.length;
+  let temporaryValue;
+  let randomIndex;
 
   while (0 !== currentIndex) {
 
@@ -128,17 +132,17 @@ exports.shuffle = function(array) {
   }
 
   return array;
-}
+};
 
 exports.isVideo = function(filename) {
-  for (var i = 0; i < config.supported_video.length; i++) {
+  for (let i = 0; i < config.supported_video.length; i++) {
     if (filename.toLowerCase().endsWith(config.supported_video[i])) {
       return true;
     }
   }
 
   return false;
-}
+};
 
 exports.debugLog = function(message) {
   if (config.debug && config.debug === true) {
@@ -146,4 +150,4 @@ exports.debugLog = function(message) {
   }
 
   return;
-}
+};

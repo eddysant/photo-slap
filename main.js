@@ -30,19 +30,19 @@ function createWindow() {
     
 
   // ipc functions
-  ipc.on('open-directories-dialog', function(e) {       
-    main_win.webContents.session.clearStorageData({'storages' : ['appcache', 'cookies', 'filesystem', 'indexdb', 'local storage']}, function() {
-      var opened_directories = dialog.showOpenDialog({ properties: ['openDirectory', 'multiSelections'] })
-      if (opened_directories != null) {
+  ipc.on('open-directories-dialog', function(e) {
+    main_win.webContents.session.clearStorageData({ 'storages' : ['appcache', 'cookies', 'filesystem', 'indexdb', 'local storage'] }, function() {
+      const opened_directories = dialog.showOpenDialog({ properties: ['openDirectory', 'multiSelections'] });
+      if (opened_directories !== null) {
         main_win.send('get-files', opened_directories);
       }
-    });;
+    });
   });
 
   ipc.on('get-next', function(e) {
     main_win.webContents.session.clearCache(function() {
 
-      if (file_list != null && file_list.length > 0) {
+      if (file_list !== null && file_list.length > 0) {
         current_image++;
         if (current_image >= file_list.length) {
           current_image = 0;
@@ -57,7 +57,7 @@ function createWindow() {
 
   ipc.on('get-prev', function(e) {
     main_win.webContents.session.clearCache(function() {
-      if (file_list != null && file_list.length > 0) {
+      if (file_list !== null && file_list.length > 0) {
         current_image--;
 
         if (current_image < 0) {
@@ -68,7 +68,7 @@ function createWindow() {
         main_win.setTitle(file_list[current_image]);
         main_win.send('update-display-image', file_list[current_image]);
       }
-    })
+    });
   });
 
   ipc.on('delete-file', function(e) {
@@ -77,7 +77,8 @@ function createWindow() {
       file_list.splice(current_image, 1);
       main_win.setTitle(file_list[current_image]);
       main_win.send('update-display-image', file_list[current_image]);
-    } else {
+    }
+    else {
       alert('error deleting file');
     }
     
@@ -95,7 +96,7 @@ function createWindow() {
     file_list = [];
 
     utils.debugLog('load-files');
-    if (files != null && files.length > 0) {
+    if (files !== null && files.length > 0) {
       current_image = 0;
       file_list = files;
 
@@ -107,7 +108,7 @@ function createWindow() {
 
   ipc.on('shuffle-files', function(e) {
     utils.debugLog('shuffle-files');
-    if (file_list == null || file_list.length == 0) {
+    if (file_list === null || file_list.length === 0) {
       return;
     }
 
@@ -118,11 +119,11 @@ function createWindow() {
   });
 
   ipc.on('open-url-in-external', function(e, url) {
-    shell.openExternal(url)
+    shell.openExternal(url);
   });
 
   ipc.on('close', function(e) {
-    app.quit()
+    app.quit();
   });
 
 
