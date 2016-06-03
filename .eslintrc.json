@@ -74,7 +74,7 @@
 		"no-mixed-requires": "error",
 		"array-bracket-spacing": "error",
 		"block-spacing": "error",
-		"brace-style": ["error", "stroustrup"],
+		"brace-style": ["error", "1tbs"],
 		"comma-spacing": ["error", { "before": false, "after": true }],
 		"comma-style": ["error", "last"],
 		"indent": ["error", 2],
@@ -92,6 +92,7 @@
 		"no-duplicate-imports": "error",
 		"no-const-assign": "error",
 		"space-in-parens": ["error", "never"],
+		"space-before-blocks": always,
 		"semi": "error"
     }
 }
