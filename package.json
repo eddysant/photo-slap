@@ -16,7 +16,7 @@
     "url": "git+https://github.com/eddysant/photo-slap.git"
   },
   "keywords": [
-    "Electron",
+    "electron",
     "slide",
     "show",
     "photo"
@@ -28,10 +28,10 @@
   },
   "homepage": "https://github.com/eddysant/photo-slap#readme",
   "devDependencies": {
-    "electron-packager": "^7.0.2",
-    "electron-prebuilt": "^1.0.1",
+    "electron-packager": "^7.0.3",
+    "electron-prebuilt": "^1.2.1",
     "esprima": "^2.7.2",
-    "mocha": "^2.4.5",
-    "should": "^8.3.1"
+    "mocha": "^2.5.3",
+    "should": "^8.4.0"
   }
 }

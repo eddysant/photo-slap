@@ -13,7 +13,7 @@
 		"jquery":true
     },
 	"parser": "esprima",
-    "rules": {
+	"rules": {
 		"comma-dangle": ["error", "never"],
 		"no-cond-assign":  ["error", "except-parens"],
 		"no-constant-condition": "error",
@@ -92,6 +92,6 @@
 		"no-duplicate-imports": "error",
 		"no-const-assign": "error",
 		"space-in-parens": ["error", "never"],
-        "semi": "error"
+		"semi": "error"
     }
 }
