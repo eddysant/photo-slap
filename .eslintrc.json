@@ -1,17 +1,17 @@
 {
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx": true
-        }
-    },
+	"parserOptions": {
+		"ecmaVersion": 6,
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	},
 	"env": {
 		"browser": true,
 		"mocha":true,
-        "node": true,
+		"node": true,
 		"jquery":true
-    },
+	},
 	"parser": "esprima",
 	"rules": {
 		"comma-dangle": ["error", "never"],
@@ -80,7 +80,7 @@
 		"indent": ["error", 2],
 		"keyword-spacing": ["error", { "before": true, "after": true }],
 		"max-depth":  ["error", 5],
-		"max-nested-callbacks": ["error", 3],
+		"max-nested-callbacks": ["error", 5],
 		"max-statements": ["error", 30],
 		"new-cap": ["error", { "newIsCap": true }],
 		"new-parens": "error",

@@ -18,8 +18,7 @@ exports.getFiles = function(directories, addVideos, callback) {
   async.each(directories, exports.walkDirectories, function(err) {
     if (err) {
       return callback(null, err);
-    }
-    else {
+    } else {
       return callback(directoryFiles);
     }
   });
@@ -33,8 +32,7 @@ exports.walkDirectories = function(directory, callback) {
     if (error) {
       exports.debugLog(error);
       return callback(error);
-    }
-    else {
+    } else {
       exports.debugLog('adding files: ' + results);
       directoryFiles = directoryFiles.concat(results);
       return callback();
@@ -65,27 +63,31 @@ exports.walk = function(dir, done) {
       fs.stat(resolved_file, function(err, stat) {
 
         if (stat && stat.isDirectory()) {
-          exports.walk(file, function(err, res) {
+          exports.walk(resolved_file, function(err, res) {
             results = results.concat(res);
-
             if (!--pending) {
               return done(null, results);
             }
+            
+            return null;
           });
 
-        }
-        else {
+        } else {
 
-          if (exports.includeFile(file)) {
-            results.push(file);
+          if (exports.includeFile(resolved_file)) {
+            results.push(resolved_file);
           }
 
           if (!--pending) {
             return done(null, results);
           }
         }
+            
+        return null;
       });
     });
+    
+    return null;
   });
 };
 
@@ -108,8 +110,7 @@ exports.deleteFile = function(filename) {
   try {
     fs.unlink(filename);
     return true;
-  }
-  catch (ex) {
+  } catch (ex) {
     return false;
   }
 };

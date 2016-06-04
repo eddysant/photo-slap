@@ -77,8 +77,7 @@ function createWindow() {
       file_list.splice(current_image, 1);
       main_win.setTitle(file_list[current_image]);
       main_win.send('update-display-image', file_list[current_image]);
-    }
-    else {
+    } else {
       alert('error deleting file');
     }
     

@@ -89,8 +89,7 @@ ipc.on('update-display-image', function(e, filename) {
   if (utils.isVideo(filename)) {
     $('#video-div').removeClass('hidden');
     $('#video-player').attr('src', adjusted_path);
-  }
-  else {
+  } else {
     $('#display-div').removeClass('hidden');
     $('#display-div').css('background-image', 'url(file://' + adjusted_path + ')');
   }
