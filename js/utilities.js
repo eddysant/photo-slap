@@ -7,9 +7,10 @@ const config = require('../config');
 const $ = require('./jquery');
 
 
+const bytes_to_mega = 1000000;
+
 let directoryFiles = [];
 let includeVideos = false;
-let bytes_to_mega = 1000000;
 
 exports.getFiles = function(directories, addVideos, callback) {
 

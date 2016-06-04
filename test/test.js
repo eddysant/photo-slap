@@ -1,9 +1,15 @@
 'use strict';
 
 const assert = require('assert');
+const utilities = require('../js/utilities');
 
-describe('String#split', function(){
-  it('should return an array', function(){
-    assert(Array.isArray('a,b,c'.split(',')));
+describe('utilities - isVideo', function() {
+  it('should return true', function() {
+    assert(utilities.isVideo('file.mp4'));
   });
+  
+  it('should return false', function() {
+    assert(false === utilities.isVideo('file.jpg'));
+  });
+  
 });
