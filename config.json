@@ -14,5 +14,6 @@
     "gifv",
     "ogg"
   ],
-  "number_of_splash_imgs": 7
+  "number_of_splash_imgs": 7,
+  "max_image_size_in_mb": 2
 }

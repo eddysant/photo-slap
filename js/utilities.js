@@ -9,6 +9,7 @@ const $ = require('./jquery');
 
 let directoryFiles = [];
 let includeVideos = false;
+let bytes_to_mega = 1000000;
 
 exports.getFiles = function(directories, addVideos, callback) {
 
@@ -61,7 +62,7 @@ exports.walk = function(dir, done) {
 
       const resolved_file = path.resolve(dir, file);
       fs.stat(resolved_file, function(err, stat) {
-
+          
         if (stat && stat.isDirectory()) {
           exports.walk(resolved_file, function(err, res) {
             results = results.concat(res);
@@ -73,8 +74,8 @@ exports.walk = function(dir, done) {
           });
 
         } else {
-
-          if (exports.includeFile(resolved_file)) {
+          
+          if (exports.includeFile(resolved_file, stat)) {
             results.push(resolved_file);
           }
 
@@ -91,11 +92,19 @@ exports.walk = function(dir, done) {
   });
 };
 
-exports.includeFile = function(filename) {
+exports.includeFile = function(filename, stat) {
 
   for (let i = 0; i < config.supported_extensions.length; i++) {
     if (filename.toLowerCase().endsWith(config.supported_extensions[i])) {
-      return true;
+      
+      if ((stat.size / bytes_to_mega) > config.max_image_size_in_mb) {
+        if (config.debug && config.debug === true) {
+          console.log('file to large, skipping | size: ' + stat.size / bytes_to_mega + ' | name: ' + filename);
+        }
+        return false;
+      } else {
+        return true;
+      }
     }
   }
 
