@@ -2,7 +2,9 @@
 slideshow application written in electron and node
 
 [![Build Status](https://travis-ci.org/eddysant/photo-slap.svg?branch=master)](https://travis-ci.org/eddysant/photo-slap) 
+[![Build status](https://ci.appveyor.com/api/projects/status/pqgyrkl9y307s49r/branch/master?svg=true)](https://ci.appveyor.com/project/eddysant/photo-slap/branch/master)
 [![Dependency Status](https://www.versioneye.com/user/projects/573232bea0ca350034be760c/badge.svg?style=flat)](https://www.versioneye.com/user/projects/573232bea0ca350034be760c)
+
 
 ### raison d'etre:
 there doesn't seem to be any full featured photo slide show applications, and if you're like me, you might have tens of thousands of photos, or more, organized in many different folders and you're too lazy to go through them all individually. i have just always found slide show apps to be pretty bad, so hopefully this one is better. 
@@ -28,7 +30,7 @@ my issue is that most slide show applications only seem to support one folder at
 * OS X (future)
 
 ### development
-clone the repo and run `npm install` followed by`npm run rebuild` then simply run `npm start` to start the app
+clone the repo and run `npm install` followed by `npm start` to start the app
 
 ### licensing
 MIT
