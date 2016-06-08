@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron main.js",
     "test": "mocha ./test/test.js",
-    "lint": "gulp es-lint",
+    "lint": "gulp eslint",
     "win-bundle": "electron-packager . photo-slap --platform=win32 --arch=x64 --icon=resources/photo-slap.ico --version=1.2.2",
     "mac-bundle": "electron-packager . photo-slap --platform=darwin --arch=x64 --icon=resources/photo-slap.ico --version=1.2.2"
   },
