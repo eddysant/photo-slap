@@ -20,7 +20,7 @@ function createWindow() {
   let current_image;
 
   current_image = 0;
-  main_win = new BrowserWindow({ width: 1024, height: 768, icon: './resources/photoslap.png' });
+  main_win = new BrowserWindow({ width: 1024, height: 768, icon: './resources/photo-slap.png' });
   main_win.loadURL('file://' + __dirname + '/html/index.html');
 
   // Open the DevTools.
