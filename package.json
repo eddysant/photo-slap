@@ -1,12 +1,14 @@
 {
   "name": "photo-slap",
-  "version": "0.0.2",
-  "description": "An Electron slide-show application",
+  "version": "0.1.0",
+  "description": "electron slide-show application",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
     "test": "mocha ./test/test.js",
-    "win-bundle": "electron-packager . photo-slap --platform=win32 --arch=ia32 --version=0.0.1"
+    "lint": "gulp es-lint",
+    "win-bundle": "electron-packager . photo-slap --platform=win32 --arch=x64 --icon=resources/photo-slap.ico --version=1.2.2",
+    "mac-bundle": "electron-packager . photo-slap --platform=darwin --arch=x64 --icon=resources/photo-slap.ico --version=1.2.2"
   },
   "dependencies": {
     "async": "^1.5.2"
@@ -17,12 +19,10 @@
   },
   "keywords": [
     "electron",
-    "slide",
-    "show",
     "photo"
   ],
   "author": "Eddy Sant",
-  "license": "CC0-1.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/eddysant/photo-slap/issues"
   },
