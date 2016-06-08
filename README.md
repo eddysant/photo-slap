@@ -21,7 +21,6 @@ my issue is that most slide show applications only seem to support one folder at
 ### feature sets coming:
 * Automatic slide show and on screen controls
 * Chromecast support
-* Updated Icons
 * Cloud drive support
 * Social media integration
 
