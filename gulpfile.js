@@ -7,7 +7,7 @@ var gulp = require('gulp'),
 gulp.task('eslint', function() {
 	var thresholdWarnings = 3;
  
-	return gulp.src(['**/*.js', '!node_modules/**'])
+	return gulp.src(['**/*.js', '!node_modules/**', '!bower_components/**'])
 		.pipe(eslint())
 		.pipe(eslint.format())
 		.pipe(eslintThreshold.afterWarnings(thresholdWarnings, function (numberOfWarnings) {
