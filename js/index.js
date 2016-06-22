@@ -12,6 +12,7 @@ const $ = require('../js/jquery');
 
 let load_videos = false;
 let shuffle_files = false;
+let slideshow_toggle = null;
 
 $(document).ready(function() {
   chooseSplash();
@@ -25,6 +26,7 @@ $(document).on('keydown', function(e) {
   const back_arrow = 37;
   const forward_arrow = 39;
   const delete_key = 46;
+  const space_key = 32;
   
   if (e.keyCode === back_arrow) {
     return prevImage(e);
@@ -34,6 +36,9 @@ $(document).on('keydown', function(e) {
   }
   if (e.keyCode === delete_key) {
     return deleteImage(e);
+  }
+  if (e.keyCode === space_key) {
+    return toggleSlideShow(e);
   }
   
   return null;
@@ -62,6 +67,18 @@ function deleteImage(e) {
   }
   
 }
+
+function toggleSlideShow(e) {
+  utils.debugLog("toggle slide show");
+
+  if (slideshow_toggle !== null) {
+    window.clearInterval(slideshow_toggle);
+    slideshow_toggle = null;
+  } else {
+    slideshow_toggle = window.setInterval(nextImage, config.slide_show_timer_in_milliseconds);
+  }
+}
+
 
 function chooseSplash(e) {
   
