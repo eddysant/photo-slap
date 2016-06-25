@@ -16,5 +16,6 @@
   ],
   "number_of_splash_imgs": 7,
   "max_image_size_in_mb": 5,
-  "slide_show_timer_in_milliseconds": 2000
+  "slide_show_timer_in_milliseconds": 2000,
+  "slide_show_pause_for_video": true
 }

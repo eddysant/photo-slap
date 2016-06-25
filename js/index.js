@@ -8,7 +8,7 @@ const MenuItem = remote.MenuItem;
 const fs = require('fs');
 const utils = require('../js/utilities');
 const config = require('../config');
-const $ = require('../js/jquery');
+const $ = require('jquery');
 
 let load_videos = false;
 let shuffle_files = false;
@@ -87,6 +87,18 @@ function chooseSplash(e) {
   $('#splash-div').css('background-image', 'url(./images/splash-' + random + '.jpg)');
 }
 
+function pauseSlideShowforVideo() {
+
+  if (slideshow_toggle !== null && config.slide_show_pause_for_video) {
+    window.clearInterval(slideshow_toggle);
+    $('#video-player').addEventListener('ended', function() {
+      slideshow_toggle = window.setInterval(nextImage, config.slide_show_timer_in_milliseconds);
+      nextImage();
+    }, false);
+  }
+
+}
+
 ipc.on('update-display-image', function(e, filename) {
 
   const adjusted_path = encodeURI(filename.replace(/\\/g, '/')).replace(/\(/g, '\\(').replace(/\)/g, '\\)').replace(/'/g, '\\\'').replace(/#/g, '%23');
@@ -97,15 +109,14 @@ ipc.on('update-display-image', function(e, filename) {
   
   $('#video-div').addClass('hidden');
   $('#video-player').attr('src', '');
-  
-  
-  
+      
   $('#display-div').remove();
   $('#loading-div').after('<div id="display-div" class="display-image"></div>');
   
   if (utils.isVideo(filename)) {
     $('#video-div').removeClass('hidden');
     $('#video-player').attr('src', adjusted_path);
+    pauseSlideShowForVideo();
   } else {
     $('#display-div').removeClass('hidden');
     $('#display-div').css('background-image', 'url(file://' + adjusted_path + ')');

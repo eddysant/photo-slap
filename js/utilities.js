@@ -4,8 +4,6 @@ const fs = require('fs');
 const path = require('path');
 const async = require('async');
 const config = require('../config');
-const $ = require('./jquery');
-
 
 const bytes_to_mega = 1000000;
 
