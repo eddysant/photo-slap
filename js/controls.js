@@ -56,7 +56,6 @@ exports.pauseSlideShowforVideo = function(e) {
     window.clearInterval(slideshow_toggle);
     document.getElementById('video-player').addEventListener('ended', function() {
       slideshow_toggle = window.setInterval(exports.nextImage, config.slide_show_timer_in_milliseconds);
-      exports.nextImage();
     }, false);
   }
 

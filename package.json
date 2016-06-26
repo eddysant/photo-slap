@@ -11,7 +11,7 @@
     "mac-bundle": "electron-packager . photo-slap --platform=darwin --arch=x64 --icon=resources/photo-slap.ico --version=1.2.2"
   },
   "dependencies": {
-    "async": "^2.0.0",
+    "async": "^2.0.0-rc.6",
     "jquery": "^3.0.0"
   },
   "repository": {
