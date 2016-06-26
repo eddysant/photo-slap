@@ -7,15 +7,15 @@ const Menu = remote.Menu;
 const MenuItem = remote.MenuItem;
 const fs = require('fs');
 const utils = require('../js/utilities');
+const controls = require('../js/controls');
 const config = require('../config');
 const $ = require('jquery');
 
 let load_videos = false;
 let shuffle_files = false;
-let slideshow_toggle = null;
 
 $(document).ready(function() {
-  chooseSplash();
+  controls.chooseSplash();
 });
 
 $('#add_directories').on('click', function(e) {
@@ -29,75 +29,21 @@ $(document).on('keydown', function(e) {
   const space_key = 32;
   
   if (e.keyCode === back_arrow) {
-    return prevImage(e);
+    return controls.prevImage(e);
   }
   if (e.keyCode === forward_arrow) {
-    return nextImage(e);
+    return controls.nextImage(e);
   }
   if (e.keyCode === delete_key) {
-    return deleteImage(e);
+    return controls.deleteImage(e);
   }
   if (e.keyCode === space_key) {
-    return toggleSlideShow(e);
+    return controls.toggleSlideShow(e);
   }
   
   return null;
 });
 
-function nextImage(e) {
-  // Show next image
-
-  utils.debugLog('next.');
-  ipc.send('get-next');
-}
-
-function prevImage(e) {
-  // Show previous image
-
-  utils.debugLog('previous.');
-  ipc.send('get-prev');
-}
-
-function deleteImage(e) {
-  utils.debugLog('delete');
-  
-  const yes_no = confirm('Are you sure you want to delete the image?');
-  if (yes_no === true) {
-    ipc.send('delete-file');
-  }
-  
-}
-
-function toggleSlideShow(e) {
-  utils.debugLog("toggle slide show");
-
-  if (slideshow_toggle !== null) {
-    window.clearInterval(slideshow_toggle);
-    slideshow_toggle = null;
-  } else {
-    slideshow_toggle = window.setInterval(nextImage, config.slide_show_timer_in_milliseconds);
-  }
-}
-
-
-function chooseSplash(e) {
-  
-  const random = Math.floor((Math.random() * config.number_of_splash_imgs) + 1);
-  utils.debugLog('update-splash-image: ' + random);
-  $('#splash-div').css('background-image', 'url(./images/splash-' + random + '.jpg)');
-}
-
-function pauseSlideShowforVideo() {
-
-  if (slideshow_toggle !== null && config.slide_show_pause_for_video) {
-    window.clearInterval(slideshow_toggle);
-    $('#video-player').addEventListener('ended', function() {
-      slideshow_toggle = window.setInterval(nextImage, config.slide_show_timer_in_milliseconds);
-      nextImage();
-    }, false);
-  }
-
-}
 
 ipc.on('update-display-image', function(e, filename) {
 
@@ -116,7 +62,7 @@ ipc.on('update-display-image', function(e, filename) {
   if (utils.isVideo(filename)) {
     $('#video-div').removeClass('hidden');
     $('#video-player').attr('src', adjusted_path);
-    pauseSlideShowForVideo();
+    controls.pauseSlideShowforVideo(e);
   } else {
     $('#display-div').removeClass('hidden');
     $('#display-div').css('background-image', 'url(file://' + adjusted_path + ')');
