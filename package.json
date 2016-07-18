@@ -11,8 +11,8 @@
     "mac-bundle": "electron-packager . photo-slap --platform=darwin --arch=x64 --icon=resources/photo-slap.ico --version=1.2.2"
   },
   "dependencies": {
-    "async": "^2.0.0-rc.6",
-    "jquery": "^3.0.0"
+    "async": "^2.0.0",
+    "jquery": "^3.1.0"
   },
   "repository": {
     "type": "git",
@@ -29,11 +29,11 @@
   },
   "homepage": "https://github.com/eddysant/photo-slap#readme",
   "devDependencies": {
-    "electron-packager": "^7.0.3",
-    "electron-prebuilt": "^1.2.3",
+    "electron-packager": "^7.3.0",
+    "electron-prebuilt": "^1.2.7",
     "esprima": "^2.7.2",
     "gulp": "^3.9.1",
-    "gulp-eslint": "^2.0.0",
+    "gulp-eslint": "^2.1.0",
     "gulp-eslint-threshold": "^0.1.1",
     "mocha": "^2.5.3",
     "should": "^9.0.2"
