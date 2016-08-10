@@ -1,11 +1,12 @@
 'use strict';
  
-var gulp = require('gulp'),
-	eslint = require('gulp-eslint'),
-	eslintThreshold = require('gulp-eslint-threshold');
+const gulp = require('gulp');
+const	eslint = require('gulp-eslint');
+const	eslintThreshold = require('gulp-eslint-threshold');
  
 gulp.task('eslint', function() {
-	var thresholdWarnings = 3;
+	
+	const thresholdWarnings = 3;
  
 	return gulp.src(['**/*.js', '!node_modules/**', '!bower_components/**'])
 		.pipe(eslint())

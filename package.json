@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "async": "^2.0.0",
+    "bluebird": "^3.4.1",
     "jquery": "^3.1.0"
   },
   "repository": {
