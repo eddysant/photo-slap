@@ -33,4 +33,4 @@ my issue is that most slide show applications only seem to support one folder at
 clone the repo and run `npm install` followed by `npm start` to start the app
 
 ### licensing
-MIT
+CC0 1.0 Universal
