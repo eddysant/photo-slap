@@ -14,15 +14,15 @@ const $ = require('jquery');
 let load_videos = false;
 let shuffle_files = false;
 
-$(document).ready(function() {
+$(document).ready(() => {
   controls.chooseSplash();
 });
 
-$('#add_directories').on('click', function(e) {
+$('#add_directories').on('click', (e) => {
   ipc.send('open-directories-dialog');
 });
 
-$(document).on('keydown', function(e) {
+$(document).on('keydown', (e) => {
   const back_arrow = 37;
   const forward_arrow = 39;
   const delete_key = 46;
@@ -45,10 +45,7 @@ $(document).on('keydown', function(e) {
 });
 
 
-ipc.on('update-display-image', function(e, filename) {
-
-  const adjusted_path = encodeURI(filename.replace(/\\/g, '/')).replace(/\(/g, '\\(').replace(/\)/g, '\\)').replace(/'/g, '\\\'').replace(/#/g, '%23');
-  utils.debugLog('update-display-image: ' + adjusted_path);
+ipc.on('update-display-image', (e, filename) => {
   
   $('#splash-div').addClass('hidden');
   $('#splash-div').css('background-image', 'none');
@@ -60,18 +57,26 @@ ipc.on('update-display-image', function(e, filename) {
   $('#loading-div').after('<div id="display-div" class="display-image"></div>');
   
   if (utils.isVideo(filename)) {
+
+    const adjusted_path = encodeURI(filename.replace(/\\/g, '/')).replace(/#/g, '%23');
+    utils.debugLog('update-display-image: ' + adjusted_path);
     $('#video-div').removeClass('hidden');
     $('#video-player').attr('src', adjusted_path);
     controls.pauseSlideShowforVideo(e);
+
   } else {
+
+    const adjusted_path = encodeURI(filename.replace(/\\/g, '/')).replace(/\(/g, '\\(').replace(/\)/g, '\\)').replace(/'/g, '\\\'').replace(/#/g, '%23');
+    utils.debugLog('update-display-image: ' + adjusted_path);
     $('#display-div').removeClass('hidden');
     $('#display-div').css('background-image', 'url(file://' + adjusted_path + ')');
+
   }
 
 });
 
 
-ipc.on('get-files', function(e, opened_directories) {
+ipc.on('get-files', (e, opened_directories) => {
   utils.debugLog('get-files');
 
   $('#loading-div').removeClass('hidden');
@@ -81,7 +86,7 @@ ipc.on('get-files', function(e, opened_directories) {
   load_videos = $('#include_video').is(':checked');
   shuffle_files = $('#shuffle_files').is(':checked');
 
-  utils.getFiles(opened_directories, load_videos, function(files) {
+  utils.getFiles(opened_directories, load_videos, (files) => {
 
     $('#loading-div').addClass('hidden');
 
@@ -103,14 +108,14 @@ const appmenu_template = [
       {
         label: 'add directories',
         accelerator: 'Command+O',
-        click: function() {
+        click: () => {
           ipc.send('open-directories-dialog');
         }
       },
       {
         label: 'shuffle',
         accelerator: 'Command+R',
-        click: function() {
+        click: () => {
           ipc.send('shuffle-files');
         }
       },
@@ -120,7 +125,7 @@ const appmenu_template = [
       {
         label: 'quit',
         accelerator: 'Command+Q',
-        click: function() {
+        click: () => {
           ipc.send('close');
         }
       }
@@ -131,13 +136,13 @@ const appmenu_template = [
     submenu: [
       {
         label: 'about photo-slap',
-        click: function() {
+        click: () => {
           ipc.send('open-url-in-external', 'https://github.com/eddysant/photo-slap');
         }
       },
       {
         label: 'report issue',
-        click: function() {
+        click: () => {
           ipc.send('open-url-in-external', 'https://github.com/eddysant/photo-slap/issues');
         }
       }

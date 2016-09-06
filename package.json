@@ -12,8 +12,10 @@
   },
   "dependencies": {
     "async": "^2.0.0",
-    "bluebird": "^3.4.1",
-    "jquery": "^3.1.0"
+    "bluebird": "^3.4.6",
+    "jquery": "^3.1.0",
+    "octicons": "^4.4.0",
+    "roboto-fontface": "^0.6.0"
   },
   "repository": {
     "type": "git",

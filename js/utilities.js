@@ -10,12 +10,12 @@ const bytes_to_mega = 1000000;
 let directoryFiles = [];
 let includeVideos = false;
 
-exports.getFiles = function(directories, addVideos, callback) {
+exports.getFiles = (directories, addVideos, callback) => {
 
   exports.debugLog('getting files...');
   includeVideos = addVideos;
 
-  async.each(directories, exports.walkDirectories, function(err) {
+  async.each(directories, exports.walkDirectories, (err) => {
     if (err) {
       return callback(null, err);
     } else {
@@ -24,10 +24,10 @@ exports.getFiles = function(directories, addVideos, callback) {
   });
 };
 
-exports.walkDirectories = function(directory, callback) {
+exports.walkDirectories = (directory, callback) => {
 
 
-  exports.walk(directory, function(error, results) {
+  exports.walk(directory, (error, results) => {
 
     if (error) {
       exports.debugLog(error);
@@ -42,11 +42,11 @@ exports.walkDirectories = function(directory, callback) {
 };
 
 
-exports.walk = function(dir, done) {
+exports.walk = (dir, done) => {
 
   let results = [];
 
-  fs.readdir(dir, function(err, list) {
+  fs.readdir(dir, (err, list) => {
 
     if (err) {
       return done(err);
@@ -57,13 +57,13 @@ exports.walk = function(dir, done) {
       return done(null, results);
     }
 
-    list.forEach(function(file) {
+    list.forEach((file) => {
 
       const resolved_file = path.resolve(dir, file);
-      fs.stat(resolved_file, function(err, stat) {
+      fs.stat(resolved_file, (err, stat) => {
           
         if (stat && stat.isDirectory()) {
-          exports.walk(resolved_file, function(err, res) {
+          exports.walk(resolved_file, (err, res) => {
             results = results.concat(res);
             if (!--pending) {
               return done(null, results);
@@ -91,7 +91,7 @@ exports.walk = function(dir, done) {
   });
 };
 
-exports.includeFile = function(filename, stat) {
+exports.includeFile = (filename, stat) => {
 
   for (let i = 0; i < config.supported_extensions.length; i++) {
     if (filename.toLowerCase().endsWith(config.supported_extensions[i])) {
@@ -114,7 +114,7 @@ exports.includeFile = function(filename, stat) {
   return false;
 };
 
-exports.deleteFile = function(filename) {
+exports.deleteFile = (filename) => {
   try {
     fs.unlink(filename);
     return true;
@@ -123,7 +123,7 @@ exports.deleteFile = function(filename) {
   }
 };
 
-exports.shuffle = function(array) {
+exports.shuffle = (array) => {
 
   let currentIndex = array.length;
   let temporaryValue;
@@ -143,7 +143,7 @@ exports.shuffle = function(array) {
   return array;
 };
 
-exports.isVideo = function(filename) {
+exports.isVideo = (filename) => {
   for (let i = 0; i < config.supported_video.length; i++) {
     if (filename.toLowerCase().endsWith(config.supported_video[i])) {
       return true;
@@ -153,7 +153,7 @@ exports.isVideo = function(filename) {
   return false;
 };
 
-exports.debugLog = function(message) {
+exports.debugLog = (message) => {
   if (config.debug && config.debug === true) {
     console.log(message);
   }

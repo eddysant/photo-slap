@@ -1,5 +1,5 @@
 {
-  "debug": false,
+  "debug": true,
   "supported_extensions": [
     ".jpg",
     ".jpeg",
@@ -15,7 +15,7 @@
     "ogg"
   ],
   "number_of_splash_imgs": 7,
-  "max_image_size_in_mb": 10,
+  "max_image_size_in_mb": 15,
   "slide_show_timer_in_milliseconds": 2000,
   "slide_show_pause_for_video": true
 }
