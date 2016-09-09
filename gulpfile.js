@@ -8,12 +8,12 @@ gulp.task('eslint', function() {
 	
   const thresholdWarnings = 3;
  
-  return gulp.src(['**/*.js', '!node_modules/**', '!bower_components/**'])
-		.pipe(eslint())
-		.pipe(eslint.format())
-		.pipe(eslintThreshold.afterWarnings(thresholdWarnings, function (numberOfWarnings) {
-			throw new Error('ESLint warnings (' + numberOfWarnings + ') equal to or greater than the threshold (' + thresholdWarnings + ')');
-		}));
+  return gulp.src(['**/*.js', '!node_modules/**'])
+  .pipe(eslint())
+	.pipe(eslint.format())
+	.pipe(eslintThreshold.afterWarnings(thresholdWarnings, (numberOfWarnings) => {
+  throw new Error('ESLint warnings (' + numberOfWarnings + ') equal to or greater than the threshold (' + thresholdWarnings + ')');
+	}));
 		
 });
  

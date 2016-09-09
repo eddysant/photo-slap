@@ -73,7 +73,7 @@ function createWindow() {
 
   ipc.on('delete-file', function(e) {
     
-    if (utils.deleteFile(file_list[current_image])){
+    if (utils.deleteFile(file_list[current_image])) {
       file_list.splice(current_image, 1);
       main_win.setTitle(file_list[current_image]);
       main_win.send('update-display-image', file_list[current_image]);
