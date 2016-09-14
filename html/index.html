@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
   
   <title>photo-slap</title>
-  <link rel="stylesheet" type="text/css" href="../node_modules/octicons/build/octicons.css">
+  <link rel="stylesheet" type="text/css" href="../node_modules/font-awesome/css/font-awesome.css">
   <link rel="stylesheet" type="text/css" href="../node_modules/roboto-fontface/css/roboto/roboto-fontface.css">
   <link rel="stylesheet" type="text/css" href="css/index.css">
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
@@ -17,25 +17,48 @@
 </head>
 
 <body>
+  <!-- Starting Display -->
   <div id="splash-div" class="splash-image">    
-    <p>Use the menu above to choose directories to add to your queue. Click the randomize function, to mix up the order. Use
-      your arrow keys to navigate back and forth</p>
-    <p>
-      <input type="checkbox" id="shuffle_files" checked> Shuffle Files</input> 
-      </br>
-      <input type="checkbox" id="include_video" checked> Include videos</input>
-    </p>    
-    <p>
-      <div class="button" id="add_directories"><span class="octicon octicon-file-directory"></span> Add Directories</div>
-    </p>
+    <div class="button" id="add_directories"><i class="fa fa-folder-open" aria-hidden="true"></i> Add Directories</div>    
   </div>
+
+  <!-- Loading Display -->
   <div id="loading-div" class="loading-image hidden"></div>
+
+  <!-- Image Display -->
   <div id="display-div" class="display-image hidden"></div>
+
+  <!-- Video Display -->
   <div id="video-div" class="display-video hidden">
     <video id="video-player" width="100%" source controls autoplay>      
       <supported!>Videos are not supported</supported!>
     </video>
   </div>
+
+  <!-- Popup Controls -->
+  <div id="controls-div" class="display-controls">
+    <div class="controls-left">
+      <div id="trash-button" class="button"><i class="fa fa-trash" aria-hidden="true"></i></div>
+      <div id="option-button" class="button"><i class="fa fa-sliders" aria-hidden="true"></i></div>
+    </div>
+
+    <div class="controls-middle">
+      <div id="back-button" class="button"><i class="fa fa-backward" aria-hidden="true"></i></div>
+      <div id="play-button" class="button"><i id="play-icon" class="fa fa-play" aria-hidden="true"></i></div>      
+      <div id="forward-button" class="button"><i class="fa fa-forward" aria-hidden="true"></i></div>
+    </div>
+
+    <div class="controls-right">
+      <div id="expand-button" class="button"><i id="expand-icon" class="fa fa-expand" aria-hidden="true"></i></div>
+    </div>    
+  </div>
+
+  <!-- Options -->
+  <div id="options-modal" class="hidden">
+      <input type="checkbox" id="shuffle_files" checked> Shuffle Files</input>       
+      <input type="checkbox" id="include_video" checked> Include videos</input>    
+  </div>
+
   <script src="../js/index.js"></script>
 </body>
 

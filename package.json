@@ -15,8 +15,8 @@
     "bluebird": "^3.4.6",
     "electron-config": "^0.2.1",
     "electron-context-menu": "^0.5.0",
+    "font-awesome": "^4.6.3",
     "jquery": "^3.1.0",
-    "octicons": "^4.4.0",
     "roboto-fontface": "^0.6.0"
   },
   "repository": {

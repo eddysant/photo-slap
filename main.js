@@ -39,6 +39,10 @@ function createWindow() {
     });
   });
 
+  ipc.on('expand-adjust', function(e) {
+    main_win.setFullScreen(!main_win.isFullScreen());
+  });
+
   ipc.on('get-next', function(e) {
     main_win.webContents.session.clearCache(function() {
 

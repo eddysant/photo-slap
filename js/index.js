@@ -22,6 +22,31 @@ $('#add_directories').on('click', (e) => {
   ipc.send('open-directories-dialog');
 });
 
+$('#trash-button').on('click', (e) => {
+  return controls.deleteImage(e);
+});
+
+$('#options-button').on('click', (e) => {
+  alert('not implemented yet');
+});
+
+$('#back-button').on('click', (e) => {
+  return controls.prevImage(e);
+});
+
+$('#play-button').on('click', (e) => {
+  return controls.toggleSlideShow(e);
+});
+
+$('#forward-button').on('click', (e) => {
+  return controls.nextImage(e);
+});
+
+$('#expand-button').on('click', (e) => {
+  return controls.toggleExpand(e);
+});
+
+
 $(document).on('keydown', (e) => {
   const back_arrow = 37;
   const forward_arrow = 39;
@@ -78,6 +103,14 @@ ipc.on('update-display-image', (e, filename) => {
 
 ipc.on('get-files', (e, opened_directories) => {
   utils.debugLog('get-files');
+
+  $('#controls-div').fadeIn();
+  $('#controls-div').bind('mouseleave', () => {
+    $('#controls-div').fadeTo(500, 0);
+  });
+  $('#controls-div').bind('mouseenter', () => {
+    $('#controls-div').fadeTo(500, 0.7);
+  });
 
   $('#loading-div').removeClass('hidden');
   $('#splash-div').addClass('hidden');

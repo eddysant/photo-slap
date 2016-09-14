@@ -7,6 +7,7 @@ const config = require('../config');
 const utils = require('../js/utilities');
 
 let slideshow_toggle = null;
+let expand_toggle = false;
 
 exports.nextImageAuto = (e) => {
   exports.nextImage(e, false);
@@ -42,6 +43,21 @@ exports.deleteImage = (e) => {
   
 };
 
+exports.toggleExpand = (e) => {
+  if (expand_toggle) {
+    $('#expand-icon').removeClass('fa-compress');
+    $('#expand-icon').addClass('fa-expand');
+    
+  } else {
+    $('#expand-icon').removeClass('fa-expand');
+    $('#expand-icon').addClass('fa-compress');
+  }
+  expand_toggle = !expand_toggle;
+  utils.debugLog('expand');
+  ipc.send('expand-adjust');
+
+};
+
 exports.resetSlideShowTimer = (e) => {
   
   if (slideshow_toggle !== null) {
@@ -57,7 +73,12 @@ exports.toggleSlideShow = (e) => {
   if (slideshow_toggle !== null) {
     window.clearInterval(slideshow_toggle);
     slideshow_toggle = null;
+    $('#play-icon').removeClass('fa-pause');
+    $('#play-icon').addClass('fa-play');
+
   } else {
+    $('#play-icon').removeClass('fa-pause');
+    $('#play-icon').addClass('fa-pause');
     slideshow_toggle = window.setInterval(exports.nextImageAuto, config.slide_show_timer_in_milliseconds);
   }
 };

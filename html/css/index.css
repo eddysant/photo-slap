@@ -18,6 +18,7 @@ body, html {
   max-height: 100%;
   background: center center no-repeat;
   background-size: contain;
+  image-orientation: from-image;
 }
 
 .display-video {    
@@ -58,42 +59,24 @@ body, html {
   max-height: 100%;
   display: block;
   background: no-repeat;  
-  background-size: cover;
-  margin-top: -30px;
-  padding-top: 25px;    	    
+  background-size: cover;   
+  text-align: center;
 }
 
-.splash-image p {
-  padding: 15px;	
-	text-align: center;	
-	font-size: 30px;
-  
-  color: #FFF;
-  text-shadow: 0 0 8px #000;
-  -moz-text-shadow: 0 0 8px #000;
-  -webkit-text-shadow: 0 0 8px #000;
-            
-}
-
-.splash-image input {
-  padding: 10px;  
-}
-
-.splash-image .button {
+.splash-image .button {  
   background-color: #666699;
   color: #fff;
   box-shadow: 0 0 0 0 rgba(34,36,38,.15) inset;
-  font-size: 1rem;
+  font-size: 2rem;
   cursor: pointer;
   outline: 0;
   border: none;
   vertical-align: baseline;  
-  padding: .78571429em 1.5em;
-  font-weight: 700;        
+  padding: .78571429em .5em;          
   border-radius: .28571429rem;
-  position:absolute;
-  top:50%; 
-  left:45%;
+  width: 220px;
+  margin-top: 325px;
+  display: inline-block;  
 } 
 
 .splash-image .button:hover {
@@ -104,6 +87,51 @@ body, html {
   background-color: #52527a;
 }
 
+.display-controls {
+  padding-top: 20px;  
+  width: 100%;
+  height: 80px;
+  background-color: #000;
+  opacity: .70;
+  position: absolute;
+  bottom: 0;
+  display: none;
+}
+
+.display-controls .button {
+  background-color: #000;
+  color: #fff;
+  box-shadow: 0 0 0 0 rgba(34,36,38,.15) inset;
+  font-size: 1.7rem;
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  display: inline-block;  
+  padding: .78571429em 1.5em;          
+  border-radius: .28571429rem;  
+} 
+
+.display-controls .button:hover {
+  background-color: #5c5c8a;
+}
+
+.display-controls .button:active {
+  background-color: #52527a;
+}
+
+.controls-middle {
+    width: 40%;
+    height: inherit;
+    float: left;
+    text-align: center;
+}
+
+.controls-left, .controls-right {    
+    width: 30%;
+    height: inherit;
+    float: left;
+    text-align: center; 
+}
 
 .hidden {
   display: none;
