@@ -8,67 +8,14 @@ const MenuItem = remote.MenuItem;
 const fs = require('fs');
 const utils = require('../js/utilities');
 const controls = require('../js/controls');
+const options = require('../js/options');
 const config = require('../config');
 const $ = require('jquery');
 
-let load_videos = false;
-let shuffle_files = false;
-
 $(document).ready(() => {
+  $('[data-toggle="tooltip"]').tooltip();
   controls.chooseSplash();
 });
-
-$('#add_directories').on('click', (e) => {
-  ipc.send('open-directories-dialog');
-});
-
-$('#trash-button').on('click', (e) => {
-  return controls.deleteImage(e);
-});
-
-$('#options-button').on('click', (e) => {
-  alert('not implemented yet');
-});
-
-$('#back-button').on('click', (e) => {
-  return controls.prevImage(e);
-});
-
-$('#play-button').on('click', (e) => {
-  return controls.toggleSlideShow(e);
-});
-
-$('#forward-button').on('click', (e) => {
-  return controls.nextImage(e);
-});
-
-$('#expand-button').on('click', (e) => {
-  return controls.toggleExpand(e);
-});
-
-
-$(document).on('keydown', (e) => {
-  const back_arrow = 37;
-  const forward_arrow = 39;
-  const delete_key = 46;
-  const space_key = 32;
-  
-  if (e.keyCode === back_arrow) {
-    return controls.prevImage(e);
-  }
-  if (e.keyCode === forward_arrow) {
-    return controls.nextImage(e);
-  }
-  if (e.keyCode === delete_key) {
-    return controls.deleteImage(e);
-  }
-  if (e.keyCode === space_key) {
-    return controls.toggleSlideShow(e);
-  }
-  
-  return null;
-});
-
 
 ipc.on('update-display-image', (e, filename) => {
   
@@ -106,24 +53,21 @@ ipc.on('get-files', (e, opened_directories) => {
 
   $('#controls-div').fadeIn();
   $('#controls-div').bind('mouseleave', () => {
-    $('#controls-div').fadeTo(500, 0);
+    $('#controls-div').fadeTo(config.milliseconds_to_fade, 0);
   });
   $('#controls-div').bind('mouseenter', () => {
-    $('#controls-div').fadeTo(500, 0.7);
+    $('#controls-div').fadeTo(config.milliseconds_to_fade, config.max_opacity);
   });
 
   $('#loading-div').removeClass('hidden');
   $('#splash-div').addClass('hidden');
   $('#display-div').addClass('hidden');
 
-  load_videos = $('#include_video').is(':checked');
-  shuffle_files = $('#shuffle_files').is(':checked');
-
-  utils.getFiles(opened_directories, load_videos, (files) => {
+  utils.getFiles(opened_directories, (files) => {
 
     $('#loading-div').addClass('hidden');
 
-    if (shuffle_files) {
+    if (options.getAutoShuffle()) {
       utils.shuffle(files);
     }
 
@@ -140,16 +84,20 @@ const appmenu_template = [
     submenu: [
       {
         label: 'add directories',
-        accelerator: 'Command+O',
         click: () => {
           ipc.send('open-directories-dialog');
         }
       },
       {
         label: 'shuffle',
-        accelerator: 'Command+R',
         click: () => {
           ipc.send('shuffle-files');
+        }
+      },
+      {
+        label: 'options',
+        click: () => {
+          $('#optionsModal').modal('show');
         }
       },
       {
@@ -157,7 +105,6 @@ const appmenu_template = [
       },
       {
         label: 'quit',
-        accelerator: 'Command+Q',
         click: () => {
           ipc.send('close');
         }

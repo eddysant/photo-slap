@@ -16,6 +16,12 @@
   ],
   "number_of_splash_imgs": 7,
   "max_image_size_in_mb": 15,
-  "slide_show_timer_in_milliseconds": 2000,
-  "slide_show_pause_for_video": true
+  "milliseconds_to_fade": 500,
+  "max_opacity": 0.7,
+  "slide_show_pause_for_video": true,
+  "default_slide_show_timer": 2.5,
+  "default_auto_shuffle": false,
+  "default_include_video": true,
+  "default_use_tranistions": false,
+  "default_black_background": false  
 }

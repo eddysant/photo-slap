@@ -5,9 +5,11 @@ const ipc = electron.ipcRenderer;
 const $ = require('jquery');
 const config = require('../config');
 const utils = require('../js/utilities');
+const options = require('../js/options');
 
 let slideshow_toggle = null;
 let expand_toggle = false;
+
 
 exports.nextImageAuto = (e) => {
   exports.nextImage(e, false);
@@ -63,7 +65,7 @@ exports.resetSlideShowTimer = (e) => {
   if (slideshow_toggle !== null) {
     utils.debugLog('resetting slideshow timer');
     window.clearInterval(slideshow_toggle);
-    slideshow_toggle = window.setInterval(exports.nextImageAuto, config.slide_show_timer_in_milliseconds);
+    slideshow_toggle = window.setInterval(exports.nextImageAuto, options.getSlideShowTimer());
   }
 };
 
@@ -79,7 +81,7 @@ exports.toggleSlideShow = (e) => {
   } else {
     $('#play-icon').removeClass('fa-pause');
     $('#play-icon').addClass('fa-pause');
-    slideshow_toggle = window.setInterval(exports.nextImageAuto, config.slide_show_timer_in_milliseconds);
+    slideshow_toggle = window.setInterval(exports.nextImageAuto, options.getSlideShowTimer());
   }
 };
 
@@ -96,7 +98,7 @@ exports.pauseSlideShowforVideo = (e) => {
   if (slideshow_toggle !== null && config.slide_show_pause_for_video) {
     window.clearInterval(slideshow_toggle);
     document.getElementById('video-player').addEventListener('ended', () => {
-      slideshow_toggle = window.setInterval(exports.nextImageAuto, config.slide_show_timer_in_milliseconds);
+      slideshow_toggle = window.setInterval(exports.nextImageAuto, options.getSlideShowTimer());
     }, false);
   }
 

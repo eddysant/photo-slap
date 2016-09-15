@@ -8,6 +8,7 @@ const ipc = electron.ipcMain;
 const shell = electron.shell;
 
 const utils = require('./js/utilities');
+const options = require('./js/options');
 const config = require('./config');
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -28,7 +29,6 @@ function createWindow() {
     main_win.webContents.openDevTools();
   }
     
-
   // ipc functions
   ipc.on('open-directories-dialog', function(e) {
     main_win.webContents.session.clearStorageData({ 'storages' : ['appcache', 'cookies', 'filesystem', 'indexdb', 'local storage'] }, function() {
@@ -46,7 +46,7 @@ function createWindow() {
   ipc.on('get-next', function(e) {
     main_win.webContents.session.clearCache(function() {
 
-      if (file_list !== null && file_list.length > 0) {
+      if (file_list !== null && file_list !== undefined && file_list.length > 0) {
         current_image++;
         if (current_image >= file_list.length) {
           current_image = 0;
@@ -61,7 +61,7 @@ function createWindow() {
 
   ipc.on('get-prev', function(e) {
     main_win.webContents.session.clearCache(function() {
-      if (file_list !== null && file_list.length > 0) {
+      if (file_list !== null && file_list !== undefined && file_list.length > 0) {
         current_image--;
 
         if (current_image < 0) {
@@ -76,7 +76,10 @@ function createWindow() {
   });
 
   ipc.on('delete-file', function(e) {
-    
+    if (current_image === null || current_image === undefined) {
+      return;
+    }
+
     if (utils.deleteFile(file_list[current_image])) {
       file_list.splice(current_image, 1);
       main_win.setTitle(file_list[current_image]);
@@ -111,7 +114,7 @@ function createWindow() {
 
   ipc.on('shuffle-files', function(e) {
     utils.debugLog('shuffle-files');
-    if (file_list === null || file_list.length === 0) {
+    if (file_list === null || file_list === undefined || file_list.length === 0) {
       return;
     }
 

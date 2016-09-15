@@ -4,17 +4,16 @@ const fs = require('fs');
 const path = require('path');
 const async = require('async');
 const config = require('../config');
+const options = require('../js/options');
 
 const bytes_to_mega = 1000000;
 
 let directoryFiles = [];
-let includeVideos = false;
 
-exports.getFiles = (directories, addVideos, callback) => {
+exports.getFiles = (directories, callback) => {
 
   exports.debugLog('getting files...');
-  includeVideos = addVideos;
-
+  
   async.each(directories, exports.walkDirectories, (err) => {
     if (err) {
       return callback(null, err);
@@ -95,23 +94,26 @@ exports.includeFile = (filename, stat) => {
 
   for (let i = 0; i < config.supported_extensions.length; i++) {
     if (filename.toLowerCase().endsWith(config.supported_extensions[i])) {
-      
-      if ((stat.size / bytes_to_mega) > config.max_image_size_in_mb) {
-        if (config.debug && config.debug === true) {
-          console.log('file to large, skipping | size: ' + stat.size / bytes_to_mega + ' | name: ' + filename);
-        }
-        return false;
-      } else {
-        return true;
-      }
+      return exports.isFileSmallEnough(stat);
     }
   }
 
-  if (includeVideos) {
+  if (options.getIncludeVideos()) {
     return exports.isVideo(filename);
   }
 
   return false;
+};
+
+exports.isFileSmallEnough = (stat) => {
+  if ((stat.size / bytes_to_mega) > config.max_image_size_in_mb) {
+    if (config.debug && config.debug === true) {
+      console.log('file to large, skipping | size: ' + stat.size / bytes_to_mega + ' | name: ' + filename);
+    }
+    return false;
+  } else {
+    return true;
+  }
 };
 
 exports.deleteFile = (filename) => {
