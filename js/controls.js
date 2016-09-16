@@ -9,7 +9,7 @@ const options = require('../js/options');
 
 let slideshow_toggle = null;
 let expand_toggle = false;
-
+const second_multiplier = 1000;
 
 exports.nextImageAuto = (e) => {
   exports.nextImage(e, false);
@@ -65,7 +65,7 @@ exports.resetSlideShowTimer = (e) => {
   if (slideshow_toggle !== null) {
     utils.debugLog('resetting slideshow timer');
     window.clearInterval(slideshow_toggle);
-    slideshow_toggle = window.setInterval(exports.nextImageAuto, options.getSlideShowTimer());
+    slideshow_toggle = window.setInterval(exports.nextImageAuto, second_multiplier * options.getSlideShowTimer());
   }
 };
 
@@ -81,7 +81,7 @@ exports.toggleSlideShow = (e) => {
   } else {
     $('#play-icon').removeClass('fa-pause');
     $('#play-icon').addClass('fa-pause');
-    slideshow_toggle = window.setInterval(exports.nextImageAuto, options.getSlideShowTimer());
+    slideshow_toggle = window.setInterval(exports.nextImageAuto, second_multiplier * options.getSlideShowTimer());
   }
 };
 
@@ -98,7 +98,7 @@ exports.pauseSlideShowforVideo = (e) => {
   if (slideshow_toggle !== null && config.slide_show_pause_for_video) {
     window.clearInterval(slideshow_toggle);
     document.getElementById('video-player').addEventListener('ended', () => {
-      slideshow_toggle = window.setInterval(exports.nextImageAuto, options.getSlideShowTimer());
+      slideshow_toggle = window.setInterval(exports.nextImageAuto, second_multiplier * options.getSlideShowTimer());
     }, false);
   }
 

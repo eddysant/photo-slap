@@ -62,37 +62,38 @@
   <!-- Options -->
   <div class="modal fade" role="dialog" id="optionsModal">
     <div class="modal-dialog modal-lg">		 
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">photo-slap options</h4>
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">photo-slap options</h4>
+        </div>
+        <div class="modal-body">
+          
+          <div class="option-row">
+            <div class="option-toggle"><div id="auto-shuffle-button" class="option-button"><i id="expand-icon" class="fa fa-check" aria-hidden="true"></i></div></div>
+            <div class="option-text">automatically shuffle files when opening</div>
+          </div>
+          <div class="option-row"> 
+            <div class="option-toggle"><div id="include-videos-button" class="option-button"><i id="expand-icon" class="fa fa-check" aria-hidden="true"></i></div></div> 
+            <div class="option-text">include video files when opening</div>
+          </div>
+          <div class="option-row">
+            <div class="option-toggle"><div id="transitions-button" class="option-button"><i id="expand-icon" class="fa fa-times" aria-hidden="true"></i></div></div>
+            <div class="option-text">use transitions when switching images</div>
+          </div>
+          <div class="option-row">
+            <div class="option-toggle"><div id="background-button" class="option-button"><i id="expand-icon" class="fa fa-times" aria-hidden="true"></i></div></div>
+            <div class="option-text">use black background</div>
+          </div>          
+          <div class="option-row">
+            <div class="option-toggle"><input type="text" class="form-control" id="seconds-between-images"></div>
+            <div class="option-text">how many seconds to show photos for</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>					
       </div>
-      <div class="modal-body">
-        
-        <div class="option-row">
-          <div class="option-toggle"><div id="auto-shuffle-button" class="option-button"><i id="expand-icon" class="fa fa-check" aria-hidden="true"></i></div></div>
-          <div class="option-text">automatically shuffle files when opening</div>
-        </div>
-        <div class="option-row"> 
-          <div class="option-toggle"><div id="include-videos-button" class="option-button"><i id="expand-icon" class="fa fa-check" aria-hidden="true"></i></div></div> 
-          <div class="option-text">include video files when opening</div>
-        </div>
-        <div class="option-row">
-          <div class="option-toggle"><div id="transitions-button" class="option-button"><i id="expand-icon" class="fa fa-times" aria-hidden="true"></i></div></div>
-          <div class="option-text">use transitions when switching images</div>
-        </div>
-        <div class="option-row">
-          <div class="option-toggle"><div id="background-button" class="option-button"><i id="expand-icon" class="fa fa-times" aria-hidden="true"></i></div></div>
-          <div class="option-text">use black background</div>
-        </div>          
-        <div class="option-row">
-          <div class="option-toggle"><input type="text" class="form-control" id="seconds-between-images"></div>
-          <div class="option-text">how many seconds to show photos for</div>
-        </div>
-      
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>					
     </div>
   </div>
 

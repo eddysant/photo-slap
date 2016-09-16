@@ -15,7 +15,17 @@ const $ = require('jquery');
 $(document).ready(() => {
   $('[data-toggle="tooltip"]').tooltip();
   controls.chooseSplash();
+  
+  setOptionStyle('#auto-shuffle-button', options.getAutoShuffle());
+  setOptionStyle('#include-videos-button', options.getIncludeVideos());
+  setOptionStyle('#transitions-button', options.getUseTransitions());
+  setOptionStyle('#background-button', options.getBlackBackground());
+  $('#seconds-between-images').val(options.getSlideShowTimer());
+  
 });
+
+
+
 
 ipc.on('update-display-image', (e, filename) => {
   

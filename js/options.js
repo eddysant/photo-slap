@@ -1,18 +1,17 @@
 'use strict';
 
-const config = require('../config');
-const EConfig = require('electron-config');
-const econfig = new EConfig();
+const default_config = require('../config');
+const Config = require('electron-config');
+const config = new Config();
 
 const min_reasonable_time = 0.1;
 const max_reasonable_time = 1000;
-const second_multiplier = 1000;
  
 exports.getAutoShuffle = () => {
-  if (econfig.has('auto_shuffle')) {
+  if (config.has('auto_shuffle')) {
     return config.get('auto_shuffle');
   }
-  return config.default_auto_shuffle;
+  return default_config.default_auto_shuffle;
 };
 
 exports.setAutoShuffle = (value) => {
@@ -20,10 +19,10 @@ exports.setAutoShuffle = (value) => {
 };
 
 exports.getIncludeVideos = () => {
-  if (econfig.has('include_video')) {
+  if (config.has('include_video')) {
     return config.get('include_video');
   }
-  return config.default_include_video;
+  return default_config.default_include_video;
 };
 
 exports.setIncludeVideos = (value) => {
@@ -31,10 +30,10 @@ exports.setIncludeVideos = (value) => {
 };
 
 exports.getUseTransitions = () => {
-  if (econfig.has('use_transitions')) {
+  if (config.has('use_transitions')) {
     return config.get('use_transitions');
   }
-  return config.default_use_tranistions;
+  return default_config.default_use_tranistions;
 };
 
 exports.setUseTransitions = (value) => {
@@ -42,10 +41,10 @@ exports.setUseTransitions = (value) => {
 };
 
 exports.getBlackBackground = () => {
-  if (econfig.has('black_background')) {
+  if (config.has('black_background')) {
     return config.get('black_background');
   }
-  return config.default_black_background;
+  return default_config.default_black_background;
 };
 
 exports.setBlackBackground = (value) => {
@@ -53,11 +52,11 @@ exports.setBlackBackground = (value) => {
 };
 
 exports.getSlideShowTimer = () => {
-  if (econfig.has('slide_show_timer')) {
+  if (config.has('slide_show_timer')) {
     return config.get('slide_show_timer');
   }
   
-  return config.default_slide_show_timer * second_multiplier;
+  return default_config.default_slide_show_timer;
 };
 
 exports.setSlideShowTimer = (timer) => {

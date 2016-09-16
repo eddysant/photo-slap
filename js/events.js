@@ -25,24 +25,46 @@ $('#expand-button').on('click', (e) => {
 });
 
 $('#auto-shuffle-button').on('click', (e) => {
-  return controls.deleteImage(e);
+  const val = !options.getAutoShuffle();
+  setOptionStyle('#auto-shuffle-button', val);
+  options.setAutoShuffle(val);
 });
 
 $('#include-videos-button').on('click', (e) => {
-  return controls.deleteImage(e);
+  const val = !options.getIncludeVideos();
+  setOptionStyle('#include-videos-button', val);
+  options.setIncludeVideos(val);
 });
 
 $('#transitions-button').on('click', (e) => {
-  return controls.deleteImage(e);
+  const val = !options.getUseTransitions();
+  setOptionStyle('#transitions-button', val);
+  options.setUseTransitions(val);
 });
 
 $('#background-button').on('click', (e) => {
-  return controls.deleteImage(e);
+  const val = !options.getBlackBackground();
+  setOptionStyle('#background-button', val);
+  options.setBlackBackground(val);
 });
 
 $('#seconds-between-images').on('blur', (e) => {
-  return controls.deleteImage(e);
+  const msg = options.setSlideShowTimer($('#seconds-between-images').val());
+  if (msg !== 'success') {
+    alert(msg);
+    $('#seconds-between-images').val(options.getSlideShowTimer());
+  }
 });
+
+function setOptionStyle (elem, val) {
+  if (val) {
+    $(elem).find('#expand-icon').removeClass('fa-times');
+    $(elem).find('#expand-icon').addClass('fa-check');
+  } else {
+    $(elem).find('#expand-icon').removeClass('fa-check');
+    $(elem).find('#expand-icon').addClass('fa-times');
+  }
+}
 
 
 $(document).on('keydown', (e) => {

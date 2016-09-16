@@ -133,7 +133,7 @@ body, html {
   text-align: center; 
 }
 .option-row { 
-  margin-bottom: 10px;
+  margin-bottom: 25px;
 }
 
 .option-toggle {
@@ -144,7 +144,7 @@ body, html {
 .option-text {  
   display: inline;
   font-size: 18px;
-  vertical-align: super;
+  vertical-align: top;
   margin-left: 15px;
 }
 
@@ -159,8 +159,7 @@ body, html {
   vertical-align: baseline;  
   padding: .78571429em 2.1em;          
   border-radius: .28571429rem;
-  width: 50px;
-  margin-top: 10px;
+  width: 50px;  
   display: inline-block;  
   float: right;
 }
@@ -175,6 +174,7 @@ body, html {
 
 .option-toggle .form-control  {
   width: 51px;
+  height: 28px;
   float: right;
 }
 
