@@ -94,7 +94,7 @@ exports.includeFile = (filename, stat) => {
 
   for (let i = 0; i < config.supported_extensions.length; i++) {
     if (filename.toLowerCase().endsWith(config.supported_extensions[i])) {
-      return exports.isFileSmallEnough(stat);
+      return exports.isFileSmallEnough(filename, stat);
     }
   }
 
@@ -105,7 +105,7 @@ exports.includeFile = (filename, stat) => {
   return false;
 };
 
-exports.isFileSmallEnough = (stat) => {
+exports.isFileSmallEnough = (filename, stat) => {
   if ((stat.size / bytes_to_mega) > config.max_image_size_in_mb) {
     if (config.debug && config.debug === true) {
       console.log('file to large, skipping | size: ' + stat.size / bytes_to_mega + ' | name: ' + filename);

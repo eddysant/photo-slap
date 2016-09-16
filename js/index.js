@@ -15,7 +15,7 @@ const $ = require('jquery');
 $(document).ready(() => {
   $('[data-toggle="tooltip"]').tooltip();
   controls.chooseSplash();
-  
+
   setOptionStyle('#auto-shuffle-button', options.getAutoShuffle());
   setOptionStyle('#include-videos-button', options.getIncludeVideos());
   setOptionStyle('#transitions-button', options.getUseTransitions());
@@ -25,8 +25,6 @@ $(document).ready(() => {
 });
 
 
-
-
 ipc.on('update-display-image', (e, filename) => {
   
   $('#splash-div').addClass('hidden');
@@ -34,7 +32,18 @@ ipc.on('update-display-image', (e, filename) => {
   
   $('#video-div').addClass('hidden');
   $('#video-player').attr('src', '');
-      
+
+  if (options.getUseTransitions()) {
+    $('#display-div').fadeOut(() => {
+      removeAndReplace(filename);
+    });
+  } else {
+    removeAndReplace(filename);
+  }
+});
+
+function removeAndReplace(filename) {
+
   $('#display-div').remove();
   $('#loading-div').after('<div id="display-div" class="display-image"></div>');
   
@@ -50,13 +59,16 @@ ipc.on('update-display-image', (e, filename) => {
 
     const adjusted_path = encodeURI(filename.replace(/\\/g, '/')).replace(/\(/g, '\\(').replace(/\)/g, '\\)').replace(/'/g, '\\\'').replace(/#/g, '%23');
     utils.debugLog('update-display-image: ' + adjusted_path);
-    $('#display-div').removeClass('hidden');
     $('#display-div').css('background-image', 'url(file://' + adjusted_path + ')');
+    if (options.getUseTransitions()) {
+      $('#display-div').fadeIn('slow');
+    } else {
+      $('#display-div').removeClass('hidden');
+    }
 
   }
 
-});
-
+}
 
 ipc.on('get-files', (e, opened_directories) => {
   utils.debugLog('get-files');
@@ -78,6 +90,7 @@ ipc.on('get-files', (e, opened_directories) => {
     $('#loading-div').addClass('hidden');
 
     if (options.getAutoShuffle()) {
+      utils.debugLog('suffling files');
       utils.shuffle(files);
     }
 
@@ -93,7 +106,7 @@ const appmenu_template = [
     label: 'photo-slap',
     submenu: [
       {
-        label: 'add directories',
+        label: 'open directories',
         click: () => {
           ipc.send('open-directories-dialog');
         }
