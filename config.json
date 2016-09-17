@@ -1,5 +1,5 @@
 {
-  "debug": true,
+  "debug": false,
   "supported_extensions": [
     ".jpg",
     ".jpeg",
@@ -22,6 +22,6 @@
   "default_slide_show_timer": 2.5,
   "default_auto_shuffle": false,
   "default_include_video": true,
-  "default_use_tranistions": false,
-  "default_black_background": false  
+  "default_use_tranistions": true,
+  "default_black_background": true  
 }

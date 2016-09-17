@@ -31,8 +31,15 @@
   <!-- Loading Display -->
   <div id="loading-div" class="loading-image hidden"></div>
 
-  <!-- Image Display -->
-  <div id="display-div" class="display-image hidden"></div>
+
+  <div id="full-display-div" class="full-display hidden">
+    <!-- Image Display -->
+    <div id="display-div" class="display-image"></div>
+
+    <!-- Loading Display -->
+    <div id="blurred-div" class="blurred-image"></div>    
+  </div>
+  
 
   <!-- Video Display -->
   <div id="video-div" class="display-video hidden">
@@ -83,7 +90,7 @@
           </div>
           <div class="option-row">
             <div class="option-toggle"><div id="background-button" class="option-button"><i id="expand-icon" class="fa fa-times" aria-hidden="true"></i></div></div>
-            <div class="option-text">use black background</div>
+            <div class="option-text">use simple black background</div>
           </div>          
           <div class="option-row">
             <div class="option-toggle"><input type="text" class="form-control" id="seconds-between-images"></div>

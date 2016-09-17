@@ -33,8 +33,14 @@ ipc.on('update-display-image', (e, filename) => {
   $('#video-div').addClass('hidden');
   $('#video-player').attr('src', '');
 
+
+  let element = $('#display-div');
+  if (!options.getBlackBackground()) {
+    element = $('#full-display-div');
+  }
+
   if (options.getUseTransitions()) {
-    $('#display-div').fadeOut(() => {
+    element.fadeOut(() => {
       removeAndReplace(filename);
     });
   } else {
@@ -44,8 +50,14 @@ ipc.on('update-display-image', (e, filename) => {
 
 function removeAndReplace(filename) {
 
-  $('#display-div').remove();
-  $('#loading-div').after('<div id="display-div" class="display-image"></div>');
+  
+  if (!options.getBlackBackground() && !utils.isVideo(filename)) {
+    $('#full-display-div').remove();
+    $('#loading-div').after('<div id="full-display-div" class="full-display hidden"><div id="display-div" class="display-image"></div><div id="blurred-div" class="blurred-image"></div></div>');
+  } else {
+    $('#display-div').remove();
+    $('#loading-div').after('<div id="display-div" class="display-image hidden"></div>');
+  }
   
   if (utils.isVideo(filename)) {
 
@@ -56,14 +68,22 @@ function removeAndReplace(filename) {
     controls.pauseSlideShowforVideo(e);
 
   } else {
-
+      
     const adjusted_path = encodeURI(filename.replace(/\\/g, '/')).replace(/\(/g, '\\(').replace(/\)/g, '\\)').replace(/'/g, '\\\'').replace(/#/g, '%23');
     utils.debugLog('update-display-image: ' + adjusted_path);
+    
+    let element = $('#display-div');
+    if (!options.getBlackBackground()) {
+      $('#blurred-div').css('background-image', 'url(file://' + adjusted_path + ')');
+      element = $('#full-display-div');
+    }
+
     $('#display-div').css('background-image', 'url(file://' + adjusted_path + ')');
+    
     if (options.getUseTransitions()) {
-      $('#display-div').fadeIn('slow');
+      element.fadeIn('slow').removeClass('hidden');
     } else {
-      $('#display-div').removeClass('hidden');
+      element.removeClass('hidden');
     }
 
   }
@@ -73,17 +93,11 @@ function removeAndReplace(filename) {
 ipc.on('get-files', (e, opened_directories) => {
   utils.debugLog('get-files');
 
-  $('#controls-div').fadeIn();
-  $('#controls-div').bind('mouseleave', () => {
-    $('#controls-div').fadeTo(config.milliseconds_to_fade, 0);
-  });
-  $('#controls-div').bind('mouseenter', () => {
-    $('#controls-div').fadeTo(config.milliseconds_to_fade, config.max_opacity);
-  });
-
   $('#loading-div').removeClass('hidden');
   $('#splash-div').addClass('hidden');
   $('#display-div').addClass('hidden');
+
+  $('#controls-div').fadeOut();
 
   utils.getFiles(opened_directories, (files) => {
 
@@ -93,6 +107,14 @@ ipc.on('get-files', (e, opened_directories) => {
       utils.debugLog('suffling files');
       utils.shuffle(files);
     }
+
+    $('#controls-div').fadeIn();
+    $('#controls-div').bind('mouseleave', () => {
+      $('#controls-div').fadeTo(config.milliseconds_to_fade, 0);
+    });
+    $('#controls-div').bind('mouseenter', () => {
+      $('#controls-div').fadeTo(config.milliseconds_to_fade, config.max_opacity);
+    });
 
     utils.debugLog(files);
     ipc.send('load-files', files);
