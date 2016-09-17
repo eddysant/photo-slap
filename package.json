@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
-    "test": "mocha ./test/test.js",    
+    "test": "mocha ./test/test.js",
     "win-bundle": "electron-packager . photo-slap --platform=win32 --arch=x64 --icon=resources/photo-slap.ico --version=1.2.2",
     "mac-bundle": "electron-packager . photo-slap --platform=darwin --arch=x64 --icon=resources/photo-slap.ico --version=1.2.2"
   },
@@ -13,6 +13,7 @@
     "async": "^2.0.0",
     "bluebird": "^3.4.6",
     "bootstrap": "^3.3.7",
+    "electron": "^1.4.0",
     "electron-config": "^0.2.1",
     "font-awesome": "^4.6.3",
     "jquery": "^3.1.0",
@@ -24,7 +25,8 @@
   },
   "keywords": [
     "electron",
-    "photo"
+    "photo",
+    "slideshow"
   ],
   "author": "Eddy Sant",
   "license": "MIT",

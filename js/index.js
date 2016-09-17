@@ -26,7 +26,9 @@ $(document).ready(() => {
 
 
 ipc.on('update-display-image', (e, filename) => {
-  
+
+  const switching_from_video = $('#video-div').is(":visible") === true;
+
   $('#splash-div').addClass('hidden');
   $('#splash-div').css('background-image', 'none');
   
@@ -39,7 +41,7 @@ ipc.on('update-display-image', (e, filename) => {
     element = $('#full-display-div');
   }
 
-  if (options.getUseTransitions()) {
+  if (options.getUseTransitions() && !switching_from_video) {
     element.fadeOut(() => {
       removeAndReplace(filename);
     });
@@ -50,12 +52,11 @@ ipc.on('update-display-image', (e, filename) => {
 
 function removeAndReplace(filename) {
 
-  
-  if (!options.getBlackBackground() && !utils.isVideo(filename)) {
-    $('#full-display-div').remove();
+  $('#full-display-div').remove();
+  $('#display-div').remove();
+  if (!options.getBlackBackground() && !utils.isVideo(filename)) { 
     $('#loading-div').after('<div id="full-display-div" class="full-display hidden"><div id="display-div" class="display-image"></div><div id="blurred-div" class="blurred-image"></div></div>');
   } else {
-    $('#display-div').remove();
     $('#loading-div').after('<div id="display-div" class="display-image hidden"></div>');
   }
   
