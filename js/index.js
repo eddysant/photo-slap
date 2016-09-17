@@ -43,14 +43,14 @@ ipc.on('update-display-image', (e, filename) => {
 
   if (options.getUseTransitions() && !switching_from_video) {
     element.fadeOut(() => {
-      removeAndReplace(filename);
+      removeAndReplace(e, filename);
     });
   } else {
-    removeAndReplace(filename);
+    removeAndReplace(e, filename);
   }
 });
 
-function removeAndReplace(filename) {
+function removeAndReplace(e, filename) {
 
   $('#full-display-div').remove();
   $('#display-div').remove();

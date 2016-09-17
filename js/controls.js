@@ -10,7 +10,7 @@ const options = require('../js/options');
 let slideshow_toggle = null;
 let expand_toggle = false;
 const second_multiplier = 1000;
-const fade_time = 500;
+const fade_time = 600;
 
 exports.nextImageAuto = (e) => {
   exports.nextImage(e, false);
@@ -78,6 +78,7 @@ exports.resetSlideShowTimer = (e) => {
 };
 
 exports.toggleSlideShow = (e) => {
+
   utils.debugLog("toggle slide show");
 
   if (slideshow_toggle !== null) {
