@@ -13,6 +13,8 @@ let directoryFiles = [];
 exports.getFiles = (directories, callback) => {
 
   exports.debugLog('getting files...');
+
+  directoryFiles = [];
   
   async.each(directories, exports.walkDirectories, (err) => {
     if (err) {

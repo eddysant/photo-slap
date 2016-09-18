@@ -28,33 +28,52 @@ $('#auto-shuffle-button').on('click', (e) => {
   const val = !options.getAutoShuffle();
   setOptionStyle('#auto-shuffle-button', val);
   options.setAutoShuffle(val);
+  showOptionAlert();
 });
 
 $('#include-videos-button').on('click', (e) => {
   const val = !options.getIncludeVideos();
   setOptionStyle('#include-videos-button', val);
   options.setIncludeVideos(val);
+  showOptionAlert();
 });
 
 $('#transitions-button').on('click', (e) => {
   const val = !options.getUseTransitions();
   setOptionStyle('#transitions-button', val);
   options.setUseTransitions(val);
+  showOptionAlert();
 });
 
 $('#background-button').on('click', (e) => {
   const val = !options.getBlackBackground();
   setOptionStyle('#background-button', val);
   options.setBlackBackground(val);
+  showOptionAlert();
 });
 
 $('#seconds-between-images').on('blur', (e) => {
   const msg = options.setSlideShowTimer($('#seconds-between-images').val());
   if (msg !== 'success') {
-    alert(msg);
+    showOptionAlert('danger', msg);
     $('#seconds-between-images').val(options.getSlideShowTimer());
+  } else {
+    showOptionAlert();
   }
 });
+
+function showOptionAlert (alert_type = 'success', alert_msg = 'option udpdated') {
+  
+  const delay_time = 1000;
+  const slide_time = 200;
+
+
+  $('.modal-content').append(alert_template({ type: alert_type, message: alert_msg }));
+  $(".alert").delay(delay_time).slideUp(slide_time, function() {
+    $(this).alert('close');
+  });
+
+}
 
 function setOptionStyle (elem, val) {
   if (val) {

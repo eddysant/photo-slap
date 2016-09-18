@@ -12,6 +12,8 @@ const options = require('../js/options');
 const config = require('../config');
 const $ = require('jquery');
 
+let alert_template = null;
+
 $(document).ready(() => {
   $('[data-toggle="tooltip"]').tooltip();
   controls.chooseSplash();
@@ -21,6 +23,8 @@ $(document).ready(() => {
   setOptionStyle('#transitions-button', options.getUseTransitions());
   setOptionStyle('#background-button', options.getBlackBackground());
   $('#seconds-between-images').val(options.getSlideShowTimer());
+  
+  alert_template = Handlebars.compile($("#alert-template").html());
   
 });
 
