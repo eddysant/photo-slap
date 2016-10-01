@@ -13,6 +13,7 @@ const config = require('../config');
 const $ = require('jquery');
 
 let alert_template = null;
+let change_lock = false;
 
 $(document).ready(() => {
   $('[data-toggle="tooltip"]').tooltip();
@@ -30,6 +31,12 @@ $(document).ready(() => {
 
 
 ipc.on('update-display-image', (e, filename) => {
+
+  if (change_lock) {
+    return;
+  } else {
+    change_lock = true;
+  }
 
   const switching_from_video = $('#video-div').is(":visible") === true;
 
@@ -93,6 +100,7 @@ function removeAndReplace(e, filename) {
 
   }
 
+  change_lock = false;
 }
 
 ipc.on('get-files', (e, opened_directories) => {
@@ -104,7 +112,7 @@ ipc.on('get-files', (e, opened_directories) => {
 
   $('#controls-div').fadeOut();
 
-  utils.getFiles(opened_directories, (files) => {
+  utils.getFiles(opened_directories, options.getIncludeVideos(), (files) => {
 
     $('#loading-div').addClass('hidden');
 

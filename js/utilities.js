@@ -4,16 +4,17 @@ const fs = require('fs');
 const path = require('path');
 const async = require('async');
 const config = require('../config');
-const options = require('../js/options');
 
 const bytes_to_mega = 1000000;
 
 let directoryFiles = [];
+let includeVideos = true;
 
-exports.getFiles = (directories, callback) => {
+exports.getFiles = (directories, includeVideosParam, callback) => {
 
   exports.debugLog('getting files...');
 
+  includeVideos = includeVideosParam;
   directoryFiles = [];
   
   async.each(directories, exports.walkDirectories, (err) => {
@@ -100,7 +101,7 @@ exports.includeFile = (filename, stat) => {
     }
   }
 
-  if (options.getIncludeVideos()) {
+  if (includeVideos) {
     return exports.isVideo(filename);
   }
 
