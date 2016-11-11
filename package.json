@@ -1,16 +1,16 @@
 {
   "name": "photo-slap",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "electron slide-show application",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
     "test": "mocha ./test/test.js",
-    "win-bundle": "electron-packager . photo-slap --platform=win32 --arch=x64 --icon=resources/photo-slap.ico --version=1.2.2",
-    "mac-bundle": "electron-packager . photo-slap --platform=darwin --arch=x64 --icon=resources/photo-slap.ico --version=1.2.2"
+    "win-bundle": "electron-packager . photo-slap --platform=win32 --arch=x64 --icon=resources/photo-slap.ico",
+    "mac-bundle": "electron-packager . photo-slap --platform=darwin --arch=x64 --icon=resources/photo-slap.ico"
   },
   "dependencies": {
-    "async": "^2.0.0",
+    "async": "^2.1.2",
     "bluebird": "^3.4.6",
     "bootstrap": "^3.3.7",
     "electron": "^1.4.1",

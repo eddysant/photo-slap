@@ -7,7 +7,8 @@ const config = require('../config');
 const utils = require('../js/utilities');
 const options = require('../js/options');
 
-let slideshow_toggle = null;
+let interval_reference = null;
+let slideshow_toggle = false;
 let expand_toggle = false;
 const second_multiplier = 1000;
 const fade_time = 600;
@@ -70,10 +71,10 @@ exports.toggleExpand = (e) => {
 
 exports.resetSlideShowTimer = (e) => {
   
-  if (slideshow_toggle !== null) {
+  if (interval_reference !== null || slideshow_toggle === true) {
     utils.debugLog('resetting slideshow timer');
-    window.clearInterval(slideshow_toggle);
-    slideshow_toggle = window.setInterval(exports.nextImageAuto, (second_multiplier * options.getSlideShowTimer()) + exports.addFadeTime());
+    window.clearInterval(interval_reference);
+    interval_reference = window.setInterval(exports.nextImageAuto, (second_multiplier * options.getSlideShowTimer()) + exports.addFadeTime());
   }
 };
 
@@ -81,16 +82,17 @@ exports.toggleSlideShow = (e) => {
 
   utils.debugLog("toggle slide show");
 
-  if (slideshow_toggle !== null) {
-    window.clearInterval(slideshow_toggle);
-    slideshow_toggle = null;
+  if (interval_reference !== null) {
+    window.clearInterval(interval_reference);
+    interval_reference = null;
     $('#play-icon').removeClass('fa-pause');
     $('#play-icon').addClass('fa-play');
-
+    slideshow_toggle = false;
   } else {
-    $('#play-icon').removeClass('fa-pause');
+    $('#play-icon').removeClass('fa-play');
     $('#play-icon').addClass('fa-pause');
-    slideshow_toggle = window.setInterval(exports.nextImageAuto, (second_multiplier * options.getSlideShowTimer()) + exports.addFadeTime());
+    slideshow_toggle = true;
+    interval_reference = window.setInterval(exports.nextImageAuto, (second_multiplier * options.getSlideShowTimer()) + exports.addFadeTime());
   }
 };
 
@@ -104,10 +106,14 @@ exports.chooseSplash = (e) => {
 
 exports.pauseSlideShowforVideo = (e) => {
 
-  if (slideshow_toggle !== null && config.slide_show_pause_for_video) {
-    window.clearInterval(slideshow_toggle);
+  if (interval_reference !== null && config.slide_show_pause_for_video) {
+    window.clearInterval(interval_reference);
+    interval_reference = null;
     document.getElementById('video-player').addEventListener('ended', () => {
-      slideshow_toggle = window.setInterval(exports.nextImageAuto, (second_multiplier * options.getSlideShowTimer()) + exports.addFadeTime());
+      if (interval_reference === null) {
+        utils.debugLog('resetting slideshow timer after video');
+        interval_reference = window.setInterval(exports.nextImageAuto, (second_multiplier * options.getSlideShowTimer()) + exports.addFadeTime());
+      }
     }, false);
   }
 
