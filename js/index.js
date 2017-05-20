@@ -121,7 +121,10 @@ ipc.on('get-files', (e, opened_directories) => {
       utils.shuffle(files);
     }
 
-    $('#controls-div').fadeIn();
+    $('#controls-div').fadeIn(config.milliseconds_to_fade, () => {
+      const fade_muiltipler = 7;
+      $('#controls-div').fadeTo(config.milliseconds_to_fade * fade_muiltipler, 0);
+    });
     $('#controls-div').bind('mouseleave', () => {
       $('#controls-div').fadeTo(config.milliseconds_to_fade, 0);
     });

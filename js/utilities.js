@@ -28,7 +28,6 @@ exports.getFiles = (directories, includeVideosParam, callback) => {
 
 exports.walkDirectories = (directory, callback) => {
 
-
   exports.walk(directory, (error, results) => {
 
     if (error) {
@@ -121,7 +120,7 @@ exports.isFileSmallEnough = (filename, stat) => {
 
 exports.deleteFile = (filename) => {
   try {
-    fs.unlink(filename);
+    fs.unlinkSync(filename);
     return true;
   } catch (ex) {
     return false;

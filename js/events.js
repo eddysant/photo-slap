@@ -67,7 +67,6 @@ function showOptionAlert (alert_type = 'success', alert_msg = 'option udpdated')
   const delay_time = 1000;
   const slide_time = 200;
 
-
   $('.modal-content').append(alert_template({ type: alert_type, message: alert_msg }));
   $(".alert").delay(delay_time).slideUp(slide_time, function() {
     $(this).alert('close');
@@ -91,6 +90,7 @@ $(document).on('keydown', (e) => {
   const forward_arrow = 39;
   const delete_key = 46;
   const space_key = 32;
+  const escape_key = 27;
   
   if (e.keyCode === back_arrow) {
     return controls.prevImage(e);
@@ -103,6 +103,9 @@ $(document).on('keydown', (e) => {
   }
   if (e.keyCode === space_key) {
     return controls.toggleSlideShow(e);
+  }
+  if (e.keyCode === escape_key) {
+    return controls.toggleExpand(e);
   }
   
   return null;

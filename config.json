@@ -1,5 +1,5 @@
 {
-  "debug": true,
+  "debug": false,
   "supported_extensions": [
     ".jpg",
     ".jpeg",
