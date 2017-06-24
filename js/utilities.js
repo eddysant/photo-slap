@@ -39,9 +39,7 @@ exports.walkDirectories = (directory, callback) => {
       return callback();
     }
   });
-
 };
-
 
 exports.walk = (dir, done) => {
 

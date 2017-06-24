@@ -5,6 +5,7 @@ const ipc = electron.ipcRenderer;
 const remote = electron.remote;
 const Menu = remote.Menu;
 const MenuItem = remote.MenuItem;
+const ExifImage = require('kinda-exif').ExifImage;
 const fs = require('fs');
 const utils = require('../js/utilities');
 const controls = require('../js/controls');
@@ -83,7 +84,17 @@ function removeAndReplace(e, filename) {
       
     const adjusted_path = encodeURI(filename.replace(/\\/g, '/')).replace(/\(/g, '\\(').replace(/\)/g, '\\)').replace(/'/g, '\\\'').replace(/#/g, '%23');
     utils.debugLog('update-display-image: ' + adjusted_path);
-    
+           
+    let orientation = null;
+    try {
+      const exif_data = new ExifImage({
+        image: filename
+      });
+      orientation = exif_data.exifData.image.Orientation;
+    } catch (exception) {
+      orientation = null;
+    }
+
     let element = $('#display-div');
     if (!options.getBlackBackground()) {
       $('#blurred-div').css('background-image', 'url(file://' + adjusted_path + ')');
@@ -91,17 +102,40 @@ function removeAndReplace(e, filename) {
     }
 
     $('#display-div').css('background-image', 'url(file://' + adjusted_path + ')');
-    
+       
     if (options.getUseTransitions()) {
       element.fadeIn('slow').removeClass('hidden');
     } else {
       element.removeClass('hidden');
     }
 
+    adjustOrientation(orientation);
+
   }
 
   change_lock = false;
 }
+
+function adjustOrientation(orientation) {
+  const normal = 1;
+  const upside_down = 3;
+  const flipped_left = 6;
+
+  if (orientation !== null && orientation !== undefined && orientation !== normal) {
+    utils.debugLog('orientation: ' + orientation);
+    let rotation = 'rotate(-90deg)';
+    if (orientation === upside_down) {
+      rotation = 'rotate(180deg)';
+    } else if (orientation === flipped_left) {
+      rotation = 'rotate(90deg)';
+    }
+
+    $('#display-div').css('transform', rotation);
+    $('#blurred-div').css('transform', rotation);
+  }
+}
+
+
 
 ipc.on('get-files', (e, opened_directories) => {
   utils.debugLog('get-files');

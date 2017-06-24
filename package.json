@@ -10,13 +10,15 @@
     "mac-bundle": "electron-packager . photo-slap --platform=darwin --arch=x64 --icon=resources/photo-slap.ico"
   },
   "dependencies": {
-    "async": "^2.1.2",
-    "bluebird": "^3.4.6",
+    "async": "^2.4.1",
+    "bluebird": "^3.5.0",
     "bootstrap": "^3.3.7",
-    "electron": "^1.4.1",
+    "electron": "^1.7.3",
     "electron-config": "^0.2.1",
     "font-awesome": "^4.6.3",
-    "jquery": "^3.1.1",
+    "handlebars": "^4.0.10",
+    "jquery": "^3.2.1",
+    "kinda-exif": "^0.4.1",
     "roboto-fontface": "^0.6.0"
   },
   "repository": {
