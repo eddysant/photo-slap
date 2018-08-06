@@ -10,14 +10,14 @@
     "mac-bundle": "electron-packager . photo-slap --platform=darwin --arch=x64 --icon=resources/photo-slap.ico"
   },
   "dependencies": {
-    "async": "^2.5.0",
+    "async": "^2.6.1",
     "bluebird": "^3.5.1",
     "bootstrap": "^3.3.7",
-    "electron": "^1.8.1",
+    "electron": "^1.8.7",
     "electron-config": "^1.0.0",
     "font-awesome": "^4.6.3",
-    "handlebars": "^4.0.10",
-    "jquery": "^3.2.1",
+    "handlebars": "^4.0.11",
+    "jquery": "^3.3.1",
     "kinda-exif": "^0.4.1",
     "roboto-fontface": "^0.8.0"
   },
@@ -39,11 +39,11 @@
   "devDependencies": {
     "electron-packager": "^9.1.0",
     "electron-prebuilt": "^1.4.1",
-    "esprima": "^4.0.0",
-    "gulp": "^3.9.1",
-    "gulp-eslint": "^4.0.0",
+    "esprima": "^4.0.1",
+    "gulp": "^4.0.0",
+    "gulp-eslint": "^4.0.2",
     "gulp-eslint-threshold": "^0.1.1",
-    "mocha": "^4.0.0",
-    "should": "^13.1.0"
+    "mocha": "^4.1.0",
+    "should": "^13.2.3"
   }
 }
