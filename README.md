@@ -23,7 +23,6 @@ my issue is that most slide show applications only seem to support one folder at
 
 ### currently supported
 * Windows
-* OS X (future)
 
 ### development
 clone the repo and run `npm install` followed by `npm start` to start the app

@@ -103,7 +103,7 @@ body, html {
   vertical-align: baseline;  
   padding: .78571429em .5em;          
   border-radius: .28571429rem;
-  width: 220px;
+  width: 255px;
   margin-top: 325px;
   display: inline-block;  
 } 
@@ -117,9 +117,9 @@ body, html {
 }
 
 .display-controls {
-  padding-top: 20px;  
+  padding-top: 10px;  
   width: 100%;
-  height: 80px;
+  height: 90px;
   background-color: #000;
   opacity: .70;
   position: absolute;
@@ -176,6 +176,7 @@ body, html {
   font-size: 18px;
   vertical-align: top;
   margin-left: 15px;
+  text-align: center;
 }
 
 .option-button {  
@@ -189,8 +190,8 @@ body, html {
   vertical-align: baseline;  
   padding: .78571429em 2.1em;          
   border-radius: .28571429rem;
-  width: 50px;  
-  display: inline-block;  
+  width: 65px;  
+  display: inline-block;
   float: right;
 }
 
@@ -206,6 +207,10 @@ body, html {
   width: 78px;
   height: 28px;
   float: right;
+}
+
+.modal-header {
+  display: inline !important;
 }
 
 .hidden {

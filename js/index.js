@@ -17,9 +17,9 @@ let alert_template = null;
 let change_lock = false;
 
 $(document).ready(() => {
-  $('[data-toggle="tooltip"]').tooltip();
   controls.chooseSplash();
-
+  $('[data-toggle="tooltip"]').tooltip();
+  
   setOptionStyle('#auto-shuffle-button', options.getAutoShuffle());
   setOptionStyle('#include-videos-button', options.getIncludeVideos());
   setOptionStyle('#transitions-button', options.getUseTransitions());
