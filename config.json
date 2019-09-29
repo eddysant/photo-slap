@@ -1,18 +1,18 @@
 {
-  "debug": true,
+  "debug": false,
   "supported_extensions": [
     ".jpg",
     ".jpeg",
     ".webp",
-    "gif",
+    ".gif",
     ".png",
-    ".bmp"
+    ".bmp"    
   ],
   "supported_video": [
     ".webm",
     ".mp4",
-    "gifv",
-    "ogg"
+    ".gifv",
+    ".ogg"
   ],
   "number_of_splash_imgs": 7,
   "max_image_size_in_mb": 15,

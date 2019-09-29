@@ -10,17 +10,16 @@
     "mac-bundle": "electron-packager . photo-slap --platform=darwin --arch=x64 --icon=resources/photo-slap.ico"
   },
   "dependencies": {
-    "async": ">=2.6.2",
-    "bluebird": ">=3.5.3",
-    "bootstrap": ">=4.3.1",
-    "electron": ">=4.0.5",
+    "async": "^3.0.0",
+    "bluebird": "^3.5.5",
+    "bootstrap": "^4.3.1",
     "electron-config": "^1.0.0",
-    "font-awesome": ">=4.6.3",
-    "handlebars": ">=4.1.0",
-    "jquery": "^3.3.1",
+    "font-awesome": "^4.6.3",
+    "handlebars": "^4.4.0",
+    "jquery": "^3.4.1",
     "kinda-exif": ">=0.4.1",
-    "popper.js": "^1.14.7",
-    "roboto-fontface": ">=0.8.0"
+    "popper.js": "^1.15.0",
+    "roboto-fontface": ">=0.10.0"
   },
   "repository": {
     "type": "git",
@@ -38,10 +37,11 @@
   },
   "homepage": "https://github.com/eddysant/photo-slap#readme",
   "devDependencies": {
-    "electron-packager": "^13.0.1",
+    "electron": "^4.2.11",
+    "electron-packager": "^13.1.1",
     "electron-prebuilt": "^1.4.1",
     "esprima": "^4.0.1",
-    "gulp": "^4.0.0",
+    "gulp": "^4.0.2",
     "gulp-eslint": "^4.0.2",
     "gulp-eslint-threshold": "^0.1.1",
     "mocha": "^4.1.0",
