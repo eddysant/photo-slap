@@ -16,7 +16,7 @@
     "electron-config": "^1.0.0",
     "font-awesome": "^4.6.3",
     "handlebars": "^4.4.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "kinda-exif": ">=0.4.1",
     "popper.js": "^1.15.0",
     "roboto-fontface": ">=0.10.0"
