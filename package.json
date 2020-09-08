@@ -15,7 +15,7 @@
     "bootstrap": "^4.3.1",
     "electron-config": "^1.0.0",
     "font-awesome": "^4.6.3",
-    "handlebars": "^4.4.0",
+    "handlebars": "^4.5.3",
     "jquery": "^3.5.0",
     "kinda-exif": ">=0.4.1",
     "popper.js": "^1.15.0",
