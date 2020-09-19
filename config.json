@@ -8,10 +8,12 @@
     ".png",
     ".bmp"    
   ],
-  "supported_video": [
+  "supported_video": [    
     ".webm",
-    ".mp4",
+    ".mp4",    
+    ".mkv",
     ".gifv",
+    ".mov",
     ".ogg"
   ],
   "number_of_splash_imgs": 7,

@@ -15,8 +15,8 @@
     "bootstrap": "^4.3.1",
     "electron-config": "^1.0.0",
     "font-awesome": "^4.6.3",
-    "handlebars": "^4.5.3",
-    "jquery": "^3.5.0",
+    "handlebars": "^4.7.3",
+    "jquery": "^3.4.1",
     "kinda-exif": ">=0.4.1",
     "popper.js": "^1.15.0",
     "roboto-fontface": ">=0.10.0"
@@ -37,7 +37,8 @@
   },
   "homepage": "https://github.com/eddysant/photo-slap#readme",
   "devDependencies": {
-    "electron": "^7.2.4",
+    "diff": "^3.5.0",
+    "electron": "^4.2.12",
     "electron-packager": "^13.1.1",
     "electron-prebuilt": "^1.4.1",
     "esprima": "^4.0.1",
@@ -45,7 +46,6 @@
     "gulp-eslint": "^4.0.2",
     "gulp-eslint-threshold": "^0.1.1",
     "mocha": "^4.1.0",
-    "should": "^13.2.3",
-    "diff": "^3.5.0"
+    "should": "^13.2.3"
   }
 }
