@@ -114,7 +114,7 @@ body, html {
   background-color: #000;
   opacity: .70;
   position: absolute;
-  bottom: 0;
+  top: 0;
   display: none;
   z-index: 100;
 }

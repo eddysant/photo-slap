@@ -3,6 +3,8 @@
   "supported_extensions": [
     ".jpg",
     ".jpeg",
+    ".jfif",
+    ".jpg_large",
     ".webp",
     ".gif",
     ".png",
@@ -10,7 +12,7 @@
   ],
   "supported_video": [    
     ".webm",
-    ".mp4",    
+    ".mp4",
     ".mkv",
     ".gifv",
     ".mov",
