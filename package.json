@@ -10,7 +10,7 @@
     "mac-bundle": "electron-packager . photo-slap --platform=darwin --arch=x64 --icon=resources/photo-slap.ico"
   },
   "dependencies": {
-    "async": "^3.0.0",
+    "async": "^3.2.2",
     "bluebird": "^3.5.5",
     "bootstrap": "^4.3.1",
     "electron-config": "^1.0.0",
