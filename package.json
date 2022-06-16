@@ -38,7 +38,7 @@
   "homepage": "https://github.com/eddysant/photo-slap#readme",
   "devDependencies": {
     "diff": "^3.5.0",
-    "electron": "^4.2.12",
+    "electron": "^15.5.5",
     "electron-packager": "^13.1.1",
     "electron-prebuilt": "^1.4.1",
     "esprima": "^4.0.1",
